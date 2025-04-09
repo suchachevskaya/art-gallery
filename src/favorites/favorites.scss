@@ -1,0 +1,23 @@
+#root {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    color: #B37A37;
+
+  }
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 10%;
+  background-color: #404040;
+  .header__navigation {
+    display: flex;
+  }
+  .header__link {
+    margin: 20px;
+    
+  }
+}
