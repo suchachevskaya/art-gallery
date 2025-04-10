@@ -1,6 +1,6 @@
 import styles from './FavIcon.module.scss';
 
-export default function FavIcon() {
+export function FavIcon() {
     return (
         <div className={styles.svgWrapper}>
             <svg

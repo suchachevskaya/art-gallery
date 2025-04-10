@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Card from "../../components/Card";
+import {Card} from "../../components/Card";
 
-export default function CardsHolder() {
+export function CardsHolder() {
   const cardsData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const [showAll, setShowAll] = useState(false);
 

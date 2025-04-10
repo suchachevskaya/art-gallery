@@ -1,4 +1,4 @@
-export default function SearchBar() {
+export function SearchBar() {
     return (
         <div className="search-wrapper">
             <div className="search-filt">

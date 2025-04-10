@@ -1,5 +1,5 @@
 import style from './Card.module.scss';
-import FavIcon from './FavIcon';
+import {FavIcon} from './FavIcon';
 
 
 type ArtCardProps = {
@@ -8,7 +8,7 @@ type ArtCardProps = {
     imageUrl: string;
 };
 
-export default function Card({ title, author, imageUrl }: ArtCardProps) {
+export function Card({ title, author, imageUrl }: ArtCardProps) {
     return (
         <div className={style.card}>
         <img src={imageUrl} alt={title} className={style.Art} />

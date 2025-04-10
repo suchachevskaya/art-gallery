@@ -1,8 +1,8 @@
-import Landing from "./Landing/Landing"
+import {Landing} from "./Landing/Landing"
 import { ErrorBoundary } from "./ErrorBoundary"
 import { Routes, Route, Link } from 'react-router-dom';
 
-function App() {
+export function App() {
 
   return (
     <>
@@ -16,5 +16,3 @@ function App() {
 
   )
 }
-
-export default App
