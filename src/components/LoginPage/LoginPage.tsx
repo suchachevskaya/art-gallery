@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import './LoginPage.scss';
+import {Link} from 'react-router-dom';
+import {FormInput} from "../FormInput/FormInput";
+import {ROUTES} from "../Routes/Routes.tsx";
 
-interface LoginForm {
+type LoginForm = {
     email: string;
     password: string;
 }
 
-const LoginPage = () => {
+export const LoginPage = () => {
     const [form, setForm] = useState<LoginForm>({
         email: '',
         password: '',
@@ -28,34 +31,28 @@ const LoginPage = () => {
         <div className="login-page">
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                <FormInput
+                    label="Email:"
+                    type="email"
+                    name="pmail"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                />
 
-                <div className="form-group">
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={form.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-
+                <FormInput
+                    label="Password:"
+                    type="password"
+                    name="password"
+                    value={form.password}
+                    onChange={handleChange}
+                    required
+                />
                 <button type="submit">Login</button>
             </form>
-            <div className="open-register-page">Don't have an account? <a href="/register">Sign up</a></div>
+            <div className="open-register-page">Don't have an account? <Link to={ROUTES.signup}>Sign up</Link></div>
         </div>
     );
 };
 
-export default LoginPage;
+
