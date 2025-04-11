@@ -1,12 +1,11 @@
-import {Description} from "./components/Description";
 import './Landing.scss';
-import {SearchBar} from "./components/SearchBar";
-import {CardsHolder} from "./components/CardsHolder";
+import { SearchBar } from "./components/SearchBar";
+import { CardsHolder } from "./components/CardsHolder";
 
 export function Landing() {
     return (
         <div className="landing">
-            <Description></Description>
+            <p className="description">Discover new awesome <span>Arts</span>!</p>
             <SearchBar></SearchBar>
             <CardsHolder></CardsHolder>
         </div>

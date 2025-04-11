@@ -1,6 +1,6 @@
-import {Landing} from "./Landing/Landing"
 import { ErrorBoundary } from "./ErrorBoundary"
 import { Routes, Route, Link } from 'react-router-dom';
+import { Landing } from "./pages/Landing/Landing";
 
 export function App() {
   const ROUTES = { home: '/'}
@@ -8,7 +8,7 @@ export function App() {
   return (
     <>
       {/* <Shapka></Shapka> */}
-      <ErrorBoundary fallback={<h2>Что-то пошло не так...</h2>}>
+      <ErrorBoundary>
         <Routes>
           <Route path={ROUTES.home} element={<Landing />} />
         </Routes>

@@ -2,7 +2,7 @@ import React from 'react';
 
 type ErrorBoundaryProps = {
   children: React.ReactNode;
-  fallback: React.ReactNode; // кастомный fallback UI
+  fallback?: React.ReactNode; // кастомный fallback UI
 };
 
 type ErrorBoundaryState = {
@@ -26,7 +26,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 
   render() {
     if (this.state.hasError) {
-      return <>{this.props.fallback}</>; // показываем fallback UI
+      return this.props.fallback ?? <h2>Что-то пошло не так...</h2>;
     }
 
     return this.props.children;

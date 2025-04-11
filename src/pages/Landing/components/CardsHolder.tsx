@@ -1,10 +1,16 @@
 import { useState } from "react";
-import {Card} from "../../components/Card";
+import { Card } from "@/components/Card";
+
+const cardsData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export function CardsHolder() {
-  const cardsData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
   const [showAll, setShowAll] = useState(false);
 
+  const handleShowAll = () => {
+    setShowAll(true);
+  };
+  
   const visibleCards = showAll ? cardsData : cardsData.slice(0, 3);
 
   return (
@@ -23,7 +29,7 @@ export function CardsHolder() {
       {!showAll && (
         <button
           className="show-all-button"
-          onClick={() => setShowAll(true)}
+          onClick={() => handleShowAll}
         >
           Показать все
         </button>
