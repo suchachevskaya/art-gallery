@@ -1,5 +1,5 @@
 import "../history/history.css"
-export default function History() {
+export function History() {
   return (
    <h1>
     history
