@@ -1,0 +1,27 @@
+.svgWrapper {
+    background-color: #f5f5f5; 
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.favIcon {
+    width: 24px;
+    height: 24px;
+    color: #38d707; 
+    transition: fill 0.2s ease;
+    vertical-align: middle;
+  
+    & path {
+      fill: currentColor; 
+      transition: fill 0.2s ease;
+    }
+  
+    &:hover path {
+      fill: currentColor; 
+    }
+}
