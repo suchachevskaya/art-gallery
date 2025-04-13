@@ -1,3 +1,4 @@
+
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import {Favorites} from "./favorites/Favorites";
@@ -19,6 +20,3 @@ export function App() {
     </>
   );
 }
-
-
-
