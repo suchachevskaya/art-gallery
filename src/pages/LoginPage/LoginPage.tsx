@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './LoginPage.scss';
+import '../../components/FormInput/FormInput.scss';
 import {Link} from 'react-router-dom';
 import {FormInput} from "@/components/FormInput/FormInput";
 import {ROUTES} from "@/routes";
@@ -28,13 +28,13 @@ export const LoginPage = () => {
     };
 
     return (
-        <div className="login-page">
+        <div className="form-input-page">
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <FormInput
                     label="Email:"
                     type="email"
-                    name="pmail"
+                    name="email"
                     value={form.email}
                     onChange={handleChange}
                     required
@@ -50,7 +50,7 @@ export const LoginPage = () => {
                 />
                 <button type="submit">Login</button>
             </form>
-            <div className="open-register-page">Don't have an account? <Link to={ROUTES.SIGNUP}>Sign up</Link></div>
+            <div className="open-another-page">Don't have an account? <Link to={ROUTES.SIGNUP}>Sign up</Link></div>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './RegisterPage.scss';
+import '../../components/FormInput/FormInput.scss';
 import {FormInput} from "@/components/FormInput/FormInput.tsx";
 import {ROUTES} from "@/routes";
 import {Link} from "react-router-dom";
@@ -40,7 +40,7 @@ export const RegisterPage = () => {
     };
 
     return (
-        <div className="register-page">
+        <div className="form-input-page">
             <h1>Sign up</h1>
             <form onSubmit={handleSubmit}>
                 <FormInput
@@ -83,7 +83,7 @@ export const RegisterPage = () => {
 
                 <button type="submit">Sign up</button>
             </form>
-            <div className="open-login-page">Already have an account? <Link to={ROUTES.LOGIN}>Log in</Link></div>
+            <div className="open-another-page">Already have an account? <Link to={ROUTES.LOGIN}>Log in</Link></div>
         </div>
     );
 };
