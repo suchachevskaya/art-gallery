@@ -79,7 +79,7 @@
   }
   
   .show-all-button {
-    background: linear-gradient(145deg, $primary-color, $btn-primary-dradient);
+    background: linear-gradient(145deg, $primary-color, $btn-primary-gradient);
     border: none;
     border-radius: 8px;
     padding: 12px 24px;
@@ -95,7 +95,7 @@
     // вместо transition: all
   
     &:hover {
-      background: linear-gradient(145deg, $btn-primary-dradient, $primary-color);
+      background: linear-gradient(145deg, $btn-primary-gradient, $primary-color);
       box-shadow: 0 6px 16px rgba(56, 215, 7, 0.4);
       transform: translateY(-2px);
     }
