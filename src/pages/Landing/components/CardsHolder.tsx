@@ -1,5 +1,6 @@
+import { Card } from "@/components/Card/Card";
 import { useState } from "react";
-import { Card } from "@/components/Card";
+
 
 const cardsData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -29,7 +30,7 @@ export function CardsHolder() {
       {!showAll && (
         <button
           className="show-all-button"
-          onClick={() => handleShowAll}
+          onClick={handleShowAll}
         >
           Показать все
         </button>

@@ -1,11 +1,15 @@
 
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import {Favorites} from "./favorites/Favorites";
-import {History} from "./history/History";
-import {Header} from "./header/Header";
+
+import { Favorites } from "./pages/favorites/Favorites";
+import { History } from "./pages/history/History";
 import { ROUTES } from "./routes";
 import { Landing } from "./pages/Landing/Landing";
+import { LoginPage } from "./pages/LoginPage/LoginPage";
+import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
+import { Header } from "./layout/header/Header";
+
 export function App() {
   return (
     <>
@@ -14,8 +18,8 @@ export function App() {
         <Route path={ROUTES.HOME} element={<Landing />} />
         <Route path={ROUTES.HISTORY} element={<History />} />
         <Route path={ROUTES.FAVORITES} element={<Favorites />} />
-        <Route path={ROUTES.LOGIN} element={<div>login</div>} />
-        <Route path={ROUTES.REGISTRATION} element={<div>registration</div>} />
+        <Route path={ROUTES.LOGIN} element={<LoginPage/>} />
+        <Route path={ROUTES.SIGNUP} element={<RegisterPage/>} />
       </Routes>
     </>
   );

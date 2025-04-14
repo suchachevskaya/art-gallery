@@ -1,11 +1,11 @@
-@import "src/styles/temp_variables.css";
-#root {
-  width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
-  color: $color-secondary;
-}
+@import "../styles/variables.scss";
+// #root {
+//   width: 100%;
+//   margin: 0 auto;
+//   padding: 0;
+//   text-align: center;
+//   color: $color-secondary;
+// }
 .header {
   display: flex;
   align-items: center;

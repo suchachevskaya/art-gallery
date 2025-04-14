@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import "../header/header.css";
-import { ROUTES } from "../routes";
+import "../header/header.scss";
+import { ROUTES } from "@/routes";
 const navItems = [
   {
     id: "1",

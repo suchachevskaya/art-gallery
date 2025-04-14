@@ -1,6 +1,6 @@
 import style from './Card.module.scss';
-import styles from './FavIcon.module.scss';
-import { ReactComponent as FavIcon } from '@/assets/123.svg?react';
+import styles from '@/components/FavIcon/FavIcon.module.scss';
+import { ReactComponent as FavIcon } from '@/assets/FavIcon.svg?react';
 
 type ArtCardProps = {
   title: string;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './LoginPage.scss';
 import {Link} from 'react-router-dom';
-import {FormInput} from "../FormInput/FormInput";
-import {ROUTES} from "../Routes/Routes.tsx";
+import {FormInput} from "@/components/FormInput/FormInput";
+import {ROUTES} from "@/routes";
 
 type LoginForm = {
     email: string;
@@ -50,7 +50,7 @@ export const LoginPage = () => {
                 />
                 <button type="submit">Login</button>
             </form>
-            <div className="open-register-page">Don't have an account? <Link to={ROUTES.signup}>Sign up</Link></div>
+            <div className="open-register-page">Don't have an account? <Link to={ROUTES.SIGNUP}>Sign up</Link></div>
         </div>
     );
 };

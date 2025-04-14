@@ -1,4 +1,4 @@
-import "../history/history.css"
+
 export function Favorites() {
   return (
    <h1>

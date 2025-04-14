@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RegisterPage.scss';
-import {FormInput} from "../FormInput/FormInput.tsx";
-import {ROUTES} from "../Routes/Routes.tsx";
+import {FormInput} from "@/components/FormInput/FormInput.tsx";
+import {ROUTES} from "@/routes";
 import {Link} from "react-router-dom";
 
 type RegisterForm = {
@@ -83,7 +83,7 @@ export const RegisterPage = () => {
 
                 <button type="submit">Sign up</button>
             </form>
-            <div className="open-login-page">Already have an account? <Link to={ROUTES.signup}>Log in</Link></div>
+            <div className="open-login-page">Already have an account? <Link to={ROUTES.LOGIN}>Log in</Link></div>
         </div>
     );
 };

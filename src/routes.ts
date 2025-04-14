@@ -3,5 +3,5 @@ HOME:"/",
 HISTORY:"/history",
 FAVORITES:"/favorites",
 LOGIN:"/login",
-REGISTRATION:"/registration"
+SIGNUP:"/signup"
 } as const;
