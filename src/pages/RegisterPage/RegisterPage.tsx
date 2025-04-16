@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import '../../components/FormInput/FormInput.scss';
 import {FormInput} from "@/components/FormInput/FormInput.tsx";
 import {ROUTES} from "@/routes";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {validateForm} from "@/components/Validation/Validation.tsx";
 
 type RegisterForm = {
     username: string;
     email: string;
     password: string;
     confirmPassword: string;
-}
+};
 
 export const RegisterPage = () => {
     const [form, setForm] = useState<RegisterForm>({
@@ -19,19 +20,60 @@ export const RegisterPage = () => {
         confirmPassword: '',
     });
 
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (form.password !== form.confirmPassword) {
-            setError('Пароли не совпадают');
-            return;
-        }
+        const formErrors = validateForm({
+            username: form.username,
+            email: form.email,
+            password: form.password,
+            confirmPassword: form.confirmPassword,
+        });
 
-        // Здесь можно добавить логику отправки данных на сервер
-        console.log('Регистрационные данные:', form);
-        setError('');
+        setErrors(formErrors);
+
+
+        if (Object.keys(formErrors).length === 0) {
+            const storedUsers = localStorage.getItem('users');
+            const users = storedUsers ? JSON.parse(storedUsers) : [];
+
+            const userExists = users.some(
+                (user: { email: string; username: string }) =>
+                    user.email === form.email || user.username === form.username
+            );
+
+            if (userExists) {
+                setError('User with this email or username already exists.');
+                return;
+            }
+
+            const newUser = {
+                username: form.username,
+                email: form.email,
+                password: form.password,
+            };
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            setError('');
+            alert('Registration successful! You can now log in.');
+
+            setForm({
+                username: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+            });
+
+            navigate(ROUTES.LOGIN);
+        } else {
+            setError('Please correct the errors in the form.');
+        }
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +84,7 @@ export const RegisterPage = () => {
     return (
         <div className="form-input-page">
             <h1>Sign up</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} noValidate>
                 <FormInput
                     label="User name:"
                     type="text"
@@ -50,6 +92,7 @@ export const RegisterPage = () => {
                     value={form.username}
                     onChange={handleChange}
                     required
+                    error={errors.username}
                 />
 
                 <FormInput
@@ -59,6 +102,7 @@ export const RegisterPage = () => {
                     value={form.email}
                     onChange={handleChange}
                     required
+                    error={errors.email}
                 />
 
                 <FormInput
@@ -68,6 +112,7 @@ export const RegisterPage = () => {
                     value={form.password}
                     onChange={handleChange}
                     required
+                    error={errors.password}
                 />
 
                 <FormInput
@@ -77,14 +122,16 @@ export const RegisterPage = () => {
                     value={form.confirmPassword}
                     onChange={handleChange}
                     required
+                    error={errors.confirmPassword}
                 />
 
                 {error && <div className="error">{error}</div>}
 
                 <button type="submit">Sign up</button>
             </form>
-            <div className="open-another-page">Already have an account? <Link to={ROUTES.LOGIN}>Log in</Link></div>
+            <div className="open-another-page">
+                Already have an account? <Link to={ROUTES.LOGIN}>Log in</Link>
+            </div>
         </div>
     );
 };
-
