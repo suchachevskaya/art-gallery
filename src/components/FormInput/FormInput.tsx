@@ -10,8 +10,8 @@ type FormInputProps = {
     error?: string;
 }
 
-export const FormInput: React.FC<FormInputProps> = ({ label, type, name, value, onChange, required,error }) =>
-     (
+export const FormInput: React.FC<FormInputProps> = ({ label, type, name, value, onChange, required, error }) =>
+    (
         <div className="form-group">
             <label>{label}</label>
             <input
@@ -21,7 +21,6 @@ export const FormInput: React.FC<FormInputProps> = ({ label, type, name, value, 
                 onChange={onChange}
                 required={required}
             />
+            {error && <div style={{ color: 'red' }}>{error}</div>}
         </div>
     );
-
-
