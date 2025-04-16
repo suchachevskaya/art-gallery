@@ -1,24 +1,22 @@
-@import "../styles/variables.scss";
-// #root {
-//   width: 100%;
-//   margin: 0 auto;
-//   padding: 0;
-//   text-align: center;
-//   color: $color-secondary;
-// }
+@use "@/styles/variables.scss" as *;
+
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
   height: 10%;
-  background-color: $color-background;
+  background-color: $color-bg-dark;
+  color: $reserve-color;
+
 
   a {
     all: unset;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+    
   }
 
   .header__navigation {
@@ -27,13 +25,16 @@
   }
   .header__link {
     margin: 20px;
+    font-size: 18px;
+    font-weight: 600;
+ 
   }
-  
+
   .header__link--history {
     &::before {
       content: "";
       display: inline-block;
-      background-image: url("src/header/icon_header/icon-history.png");
+      background-image: url("@/layout/header/icon/icon-history.png");
       width: 24px;
       height: 24px;
       margin-right: 8px;
@@ -43,7 +44,7 @@
     &::before {
       content: "";
       display: inline-block;
-      background-image: url("src/header/icon_header/icon-bookmarks.png");
+      background-image: url("@/layout/header/icon/icon-bookmarks.png");
       width: 24px;
       height: 24px;
       margin-right: 8px;
@@ -53,7 +54,7 @@
     &::before {
       content: "";
       display: inline-block;
-      background-image: url("src/header/icon_header/icons-sing-in.png");
+      background-image: url("@/layout/header/icon/icons-sing-in.png");
       width: 24px;
       height: 24px;
       margin-right: 8px;

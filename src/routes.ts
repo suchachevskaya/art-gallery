@@ -3,5 +3,6 @@ HOME:"/",
 HISTORY:"/history",
 FAVORITES:"/favorites",
 LOGIN:"/login",
-SIGNUP:"/signup"
+SIGNUP:"/signup",
+INCARD:"/cards/:cardId",
 } as const;
