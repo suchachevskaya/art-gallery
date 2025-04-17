@@ -1,0 +1,42 @@
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  
+  }
+  
+  .search-filt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+  
+  
+    gap: 1rem;
+  
+    padding: 1rem;
+  
+    input,
+    select {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+      &:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+      }
+    }
+  
+    input {
+      flex: 7;
+    }
+  
+    select {
+      flex: 3;
+    }
+  }

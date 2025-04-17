@@ -34,7 +34,7 @@ export const LoginPage = () => {
                 <FormInput
                     label="Email:"
                     type="email"
-                    name="pmail"
+                    name="email"
                     value={form.email}
                     onChange={handleChange}
                     required
