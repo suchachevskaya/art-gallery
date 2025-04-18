@@ -2,34 +2,14 @@ import "../CardPage/cardPage.scss";
 import { ReactComponent as FavIcon } from "@/assets/FavIcon.svg?react";
 import styles from "@/components/FavIcon/FavIcon.module.scss";
 import notFound from "@/assets/notFound.png";
+import { hgroupItem } from "./constants";
 export function CardPage() {
-  const hgroupItem = [
-    {
-      id: 1,
-      title: "Artist nationality:",
-      text: "Staffordshire",
-    },
-    {
-      id: 2,
-      title: "Dimentions:Sheet:",
-      text: "19.7x31x20.1cm",
-    },
-    {
-      id: 3,
-      title: "Credit Line:",
-      text: "Gift of Mrs. Charles Netcher II",
-    },
-    {
-      id: 4,
-      title: "Repository:",
-      text: "Applied Arts of Europe",
-    },
-  ];
+
   return (
     <div className="card-page">
       <figure className="card-page__figure">
         <div className="card-page__wrapper">
-          <img src={notFound} alt="" />
+          <img src={notFound} alt="notFound" />
         </div>
        <FavIcon className={`card-page__fav-icon ${styles.favIcon}`} />  {/* При реализации функционала избранного будет создан отдельный компонент для кнопки */}
       </figure>

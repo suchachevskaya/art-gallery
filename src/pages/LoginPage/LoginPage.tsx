@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './LoginPage.scss';
 import {Link} from 'react-router-dom';
 import {FormInput} from "@/components/FormInput/FormInput";
-import {ROUTES} from "@/routes";
+import {ROUTES} from "@/constants/routes";
 
 type LoginForm = {
     email: string;

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../header/header.scss";
-import { navItems } from "./constanTs";
-import { ROUTES } from "@/routes";
+import { navItems } from "./constants";
+import { ROUTES } from "@/constants/routes";
 import logoMuseum from "@/layout/header/icon/logo-museum.png";
 
 

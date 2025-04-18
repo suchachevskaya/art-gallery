@@ -1,4 +1,4 @@
-import { ROUTES } from "@/routes";
+import { ROUTES } from "@/constants/routes";
 export const  navItems = [
   {
     id: "1",
