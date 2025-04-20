@@ -1,3 +1,6 @@
+import type { SerializedError } from '@reduxjs/toolkit';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+
 export type CardData = {
     id: number;  // ID картины
     title: string;  // Название картины
@@ -11,20 +14,32 @@ export type CardData = {
     date_display: string;  // Год или дата отображения
     date_start: number;
     date_end: number;
-    image_id: string;  // ID изображения
+    image_id: string | null;  // ID изображения
+};
+
+export type Pagination = {
+    total: number;
+    limit: number;
+    offset: number;
+    total_pages: number;
+    current_page: number;
+    next_url: string;
 };
 
 export type CardsData = {
     cards: CardData[];  // Массив карточек
-    pagination: {
-      total: number;
-      limit: number;
-      offset: number;
-      total_pages: number;
-      current_page: number;
-      next_url: string;
-    };
-  };
+    pagination: Pagination;  // Пагинация
+};
+
+// Тип для всего ответа от API
+export type ApiResponse = {
+    preference: string;
+    data: CardData[];  // Массив карточек
+    pagination: Pagination;  // Пагинация
+    info: string;
+    config: string;
+};
+
 export type Filters = {
     searchValue?: string;
     artist_id: number[];
@@ -35,7 +50,7 @@ export type Filters = {
 export type CardsState = {
     filters: Filters;
     cards: CardData[];
-    pagination: CardsData['pagination'];
+    pagination: Pagination;
     isLoading: boolean;
-    error: any;
+    error: FetchBaseQueryError | SerializedError | null;
 };

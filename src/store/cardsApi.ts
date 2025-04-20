@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { CardsData, Filters } from './types/CardType';
+import type { ApiResponse, CardsData, Filters } from './types/CardType';
+import { hasFilters } from '@/utils/checkFiltersExistence';
 
 export const cardsApi = createApi({
   reducerPath: 'cardsApi',
@@ -9,55 +10,58 @@ export const cardsApi = createApi({
       query: (filters) => {
         const params = new URLSearchParams();
 
-        // Добавляем параметры поиска только если они есть
-        if (filters.searchValue?.trim()) {
-          params.set('q', filters.searchValue.trim());
-        }
+        const body = {
+          query: {
+            bool: {
+              should: filters.artist_id.map(id => ({
+                term: { artist_id: id }
+              })),
+              minimum_should_match: 1,
+              must: filters.searchValue?.trim() ? [{
+                match: { title: filters.searchValue.trim() }
+              }] : []
+            }
+          },
+          fields: [
+            "id", "title", "artist_title", "image_id", "thumbnail", "date_display", "date_start", "date_end"
+          ],
+          size: 12
+        };
 
-        // Преобразуем массивы фильтров в query[term][...] формат
-        filters.artist_id.forEach(id => {
-          params.append('query[term][artist_id]', `${id}`);
-        });
 
-        filters.places.forEach(place => {
-          params.append('query[term][place_of_origin]', place);
-        });
 
-        filters.types.forEach(type => {
-          params.append('query[term][artwork_type_title]', type);
-        });
+        // // Преобразуем другие фильтры, если они есть
+        // filters.places.forEach(place => {
+        //   params.append('query[term][place_of_origin]', place);
+        // });
+
+        // filters.types.forEach(type => {
+        //   params.append('query[term][artwork_type_title]', type);
+        // });
 
         // Обязательные поля
         params.set(
           'fields',
           'id,title,artist_title,image_id,thumbnail,date_display,date_start,date_end'
         );
-        params.set(
-          'limit',
-          '12'
-        );
+        params.set('limit', '12');
 
-        // Проверка наличия активных фильтров
-        const hasFilters = [
-          filters.searchValue,
-          filters.artist_id,
-          filters.places,
-          filters.types,
-        ].some(field => {
-          if (Array.isArray(field)) return field.length > 0;
-          if (typeof field === 'string') return field.trim() !== '';
-          return false;
-        });
-        
+        if (hasFilters(filters)) {
+          return {
+            url: 'artworks/search',
+            method: 'POST',
+            body,
+          };
+        }
 
-        // Если есть фильтры — ищем через /search
-        return `artworks${hasFilters ? '/search' : ''}?${params.toString()}`;
+        return `artworks?${params.toString()}`;
       },
-      transformResponse: (response: any) => ({
+      transformResponse: (response: ApiResponse) => ({
         cards: response.data,
         pagination: response.pagination,
       }),
     }),
+
   }),
 });
 
