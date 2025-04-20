@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CardData, CardsData , CardsState, Filters,  } from './types/CardType';
-
+import type { PayloadAction, SerializedError } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import type { CardData, CardsState, Filters, Pagination,  } from './types/CardType';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 const initialState: CardsState = {
   filters: {
@@ -48,14 +49,14 @@ const cardsSlice = createSlice({
     setCards: (state, action: PayloadAction<CardData[]>) => {
       state.cards = action.payload;
     },
-    setPagination: (state, action: PayloadAction<CardsData['pagination']>) => {
+    setPagination: (state, action: PayloadAction<Pagination>) => {
       state.pagination = action.payload;
     },
     
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    setError: (state, action: PayloadAction<any>) => {
+    setError: (state, action: PayloadAction<FetchBaseQueryError | SerializedError>) => {
       state.error = action.payload;
     },
   },

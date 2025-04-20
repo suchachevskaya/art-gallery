@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './LoginPage.scss';
 import {Link} from 'react-router-dom';
 import {FormInput} from "@/components/FormInput/FormInput";
-import {ROUTES} from "@/routes";
+import {ROUTES} from "@/constants/routes";
 
 type LoginForm = {
     email: string;
@@ -19,11 +19,11 @@ export const LoginPage = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        console.log('Данные для входа:', form);
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
+
         setForm((prevForm) => ({ ...prevForm, [name]: value }));
     };
 

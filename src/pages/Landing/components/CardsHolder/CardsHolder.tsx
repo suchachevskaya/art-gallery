@@ -1,16 +1,18 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
 import { Card } from "@/components/Card/Card";
 import "./CardsHolder.scss"
 import { useState } from 'react';
+import { getCards } from '@/store/selectors';
 
 
 
 export function CardsHolder() {
 
-  const { cards, isLoading, error } = useSelector((state: RootState) => state.cards);
+  const { cards, isLoading, error } = useSelector(getCards);
   const [showAll, setShowAll] = useState(false);
+  
   if (isLoading) return <p>Loading...</p>;
+
   if (error) return <p>Error loading cards</p>;
 
   const handleShowAll = () => {

@@ -2,6 +2,7 @@ import cardStyle from './Card.module.scss';
 import favStyle from '@/components/FavIcon/FavIcon.module.scss';
 import { ReactComponent as FavIcon } from '@/assets/FavIcon.svg?react';
 import ArtImage from '../ArtImage/ArtImage';
+import { DEFAULT_LQIP_PLACEHOLDER } from "@/constants/placeholders"
 
 type ArtCardProps = {
   title: string;
@@ -14,7 +15,7 @@ type ArtCardProps = {
       alt_text: string;
     } | null;
     date_display: string;
-    image_id: string;
+    image_id: string | null;
   }
 };
 
@@ -23,8 +24,8 @@ export function Card({ title, author, card }: ArtCardProps) {
     <div className={cardStyle.card}>
       <ArtImage
         imageId={card.image_id}
-        alt={card.thumbnail?.alt_text || 'Изображение'} // Заглушка по умолчанию
-        lqip={card.thumbnail?.lqip || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="200"%3E%3Crect width="100%" height="100%" fill="%23ccc" /%3E%3C/svg%3E'}  // Пустая строка по умолчанию
+        alt={card.thumbnail?.alt_text || 'Image'}
+        lqip={card.thumbnail?.lqip || DEFAULT_LQIP_PLACEHOLDER}
         width={300}
         height={200}
       />

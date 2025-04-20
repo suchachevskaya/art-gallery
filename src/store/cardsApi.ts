@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { ApiResponse, CardsData, Filters } from './types/CardType';
 import { hasFilters } from '@/utils/checkFiltersExistence';
+import { ROUTES } from '@/constants/routes';
+import { FIELDS } from '@/constants/params';
 
 export const cardsApi = createApi({
   reducerPath: 'cardsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.artic.edu/api/v1/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: ROUTES.BASEURL }),
   endpoints: (builder) => ({
     getCards: builder.query<CardsData, Filters>({
       query: (filters) => {
@@ -23,7 +25,7 @@ export const cardsApi = createApi({
             }
           },
           fields: [
-            "id", "title", "artist_title", "image_id", "thumbnail", "date_display", "date_start", "date_end"
+            FIELDS
           ],
           size: 12
         };
@@ -42,19 +44,19 @@ export const cardsApi = createApi({
         // Обязательные поля
         params.set(
           'fields',
-          'id,title,artist_title,image_id,thumbnail,date_display,date_start,date_end'
+          FIELDS
         );
         params.set('limit', '12');
 
         if (hasFilters(filters)) {
           return {
-            url: 'artworks/search',
+            url: ROUTES.ARTSEARCH,
             method: 'POST',
             body,
           };
         }
 
-        return `artworks?${params.toString()}`;
+        return `${ROUTES.ALLARTWORKS}?${params.toString()}`;
       },
       transformResponse: (response: ApiResponse) => ({
         cards: response.data,

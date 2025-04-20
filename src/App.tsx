@@ -4,7 +4,7 @@ import "./App.css";
 
 import { Favorites } from "./pages/favorites/Favorites";
 import { History } from "./pages/history/History";
-import { ROUTES } from "./routes";
+import { ROUTES } from "./constants/routes";
 import { Landing } from "./pages/Landing/Landing";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage/RegisterPage";

@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import './ArtImage.scss'
+import { createImgSource } from '@/utils/createImgSource';
 
 type ArtImageProps = {
-  imageId: string
+  imageId: string | null
   alt?: string
-  width?: number
-  height?: number
+  width: number
+  height: number
   lqip?: string
 }
 
@@ -16,8 +17,13 @@ export default function ArtImage({
   height = 600,
   lqip,
 }: ArtImageProps) {
+
   const [loaded, setLoaded] = useState(false)
-  const src = `https://www.artic.edu/iiif/2/${imageId}/full/${width},/0/default.jpg`
+  const src = createImgSource(imageId, width);
+
+  const handleImageLoad = (): void => {
+    setLoaded(true)
+  }
 
   return (
     <div
@@ -31,7 +37,7 @@ export default function ArtImage({
       <img
         src={src}
         alt={alt}
-        onLoad={() => setLoaded(true)}
+        onLoad={handleImageLoad}
         style={{ width, height }}
       />
     </div>

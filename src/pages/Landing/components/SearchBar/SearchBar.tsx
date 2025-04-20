@@ -6,14 +6,22 @@ import "./Searchbar.scss"
 export function SearchBar() {
 
     const dispatch = useDispatch();
-    const [searchValue, localSetSearchValue] = useState('');
+    const [searchValue, setLocalSearchValue] = useState('');
 
     useEffect(() => {
         const timeout = setTimeout(() => {
+          if (searchValue.trim().length > 0) {
             dispatch(setSearchValue(searchValue));
+          }
         }, 300);
+      
         return () => clearTimeout(timeout);
-    }, [searchValue, dispatch]);
+      }, [searchValue, dispatch]);
+      
+    // eslint-disable-next-line no-undef
+    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>{
+        setLocalSearchValue(e.target.value)
+    }
 
     return (
         <div className="search-wrapper">
@@ -22,7 +30,7 @@ export function SearchBar() {
                     type="text"
                     placeholder="Search, art, artist, work..."
                     value={searchValue}
-                    onChange={(e) => localSetSearchValue(e.target.value)}
+                    onChange={handleSearchInput}
                 />
             </div>
         </div>
