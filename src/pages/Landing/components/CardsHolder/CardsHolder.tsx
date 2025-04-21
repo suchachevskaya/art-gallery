@@ -3,6 +3,7 @@ import { Card } from "@/components/Card/Card";
 import "./CardsHolder.scss"
 import { useState } from 'react';
 import { getCards } from '@/store/selectors';
+import { CardLink } from "@/components/Card/CardLink";
 
 
 
@@ -10,7 +11,7 @@ export function CardsHolder() {
 
   const { cards, isLoading, error } = useSelector(getCards);
   const [showAll, setShowAll] = useState(false);
-  
+
   if (isLoading) return <p>Loading...</p>;
 
   if (error) return <p>Error loading cards</p>;
@@ -25,12 +26,15 @@ export function CardsHolder() {
     <div className="cards-holder-wrapper">
       <div className="card-holder">
         {visibleCards.map((card) => (
-          <Card
-            key={card.id}
-            title={card.title}
-            author={card.artist_title}
-            card={card}
-          />
+          <CardLink key={card.id} cardId={card.id}>
+            <Card
+              key={card.id}
+              title={card.title}
+              author={card.artist_title}
+              card={card}
+            />
+          </CardLink>
+
         ))}
       </div>
 

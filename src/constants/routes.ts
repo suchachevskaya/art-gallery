@@ -4,6 +4,7 @@ HISTORY:"/history",
 FAVORITES:"/favorites",
 LOGIN:"/login",
 SIGNUP:"/signup",
+INCARD:"/cards/:cardId",
 ALLARTWORKS: "artworks",
 ARTSEARCH: "artworks/search",
 BASEURL: 'https://api.artic.edu/api/v1/'
