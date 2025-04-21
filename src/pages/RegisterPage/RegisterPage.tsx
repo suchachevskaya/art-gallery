@@ -5,6 +5,7 @@ import {ROUTES} from "@/routes";
 import {Link, useNavigate} from "react-router-dom";
 import {validateForm} from "@/components/Validation/Validation.tsx";
 
+
 type RegisterForm = {
     username: string;
     email: string;
@@ -26,6 +27,7 @@ export const RegisterPage = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
 
         const formErrors = validateForm({
             username: form.username,
@@ -78,6 +80,7 @@ export const RegisterPage = () => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
+        
         setForm((prevForm) => ({ ...prevForm, [name]: value }));
     };
 

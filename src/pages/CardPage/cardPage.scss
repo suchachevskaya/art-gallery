@@ -1,0 +1,57 @@
+@use "@/styles/variables.scss" as *;
+
+.card-page {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  min-height: 84vh;
+  align-content: space-around;
+  background-color: $color-bg-light;
+  align-items: center;
+  &__figure {
+    display: flex;
+    width: 600px;
+  }
+  &__wrapper {
+    width: 0;
+
+    img {
+      width: auto;
+      max-height: 700px;
+      background: linear-gradient(135deg, #666 0%, #555 50%, #444 100%);
+    }
+  }
+  &__fav-icon {
+    margin: 30px;
+  }
+
+  &__caption {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    align-items: flex-start;
+    p,
+    h3,
+    h2 {
+      text-align: left;
+    }
+  }
+
+  &__detail {
+    display: flex;
+    align-items: center;
+  }
+
+  &__detail-title {
+    color: #38d707;
+    font-weight: 550;
+    font-size: large;
+    margin: 0 10px 0 0;
+  }
+
+  &__detail-text {
+    margin: 7px;
+  }
+}

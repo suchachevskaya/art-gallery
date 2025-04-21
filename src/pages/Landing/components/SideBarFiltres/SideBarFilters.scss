@@ -1,0 +1,61 @@
+.sidebar-filters {
+    width: 280px;
+    padding: 20px;
+    // background-color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+  }
+  
+  .filter-block {
+    margin-bottom: 30px;
+  
+    h3 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #1c1c1c;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+  
+    .filter-search {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+  
+    .filter-list {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        margin: 5px 0;
+  
+        label {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+  
+          input[type='checkbox'] {
+            margin-right: 8px;
+          }
+  
+          span {
+            &:first-of-type {
+              flex-grow: 1;
+              color: #222;
+            }
+  
+            &.count {
+              color: #666;
+              margin-left: auto;
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }

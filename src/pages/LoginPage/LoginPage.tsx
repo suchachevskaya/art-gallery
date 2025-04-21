@@ -1,8 +1,12 @@
+
 import React, { useState, useEffect } from 'react';
 import {Link, Navigate} from "react-router-dom";
 import {ROUTES} from "@/routes";
 import {FormInput} from "@/components/FormInput/FormInput.tsx";
 import { validateForm } from '@/components/Validation/Validation.tsx';
+import './LoginPage.scss';
+
+
 
 type LoginForm = {
     email: string;
@@ -36,6 +40,7 @@ export const LoginPage = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+
         const formErrors = validateForm({
             email: form.email,
             password: form.password,
@@ -64,10 +69,13 @@ export const LoginPage = () => {
         } else {
             setError('Please correct the errors in the form.');
         }
+
+
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
+
         setForm((prevForm) => ({ ...prevForm, [name]: value }));
         const newErrors = validateForm({ ...form, [name]: value });
         setErrors(newErrors);
