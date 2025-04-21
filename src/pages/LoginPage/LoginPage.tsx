@@ -19,11 +19,11 @@ export const LoginPage = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        console.log('Данные для входа:', form);
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
+
         setForm((prevForm) => ({ ...prevForm, [name]: value }));
     };
 
@@ -34,7 +34,7 @@ export const LoginPage = () => {
                 <FormInput
                     label="Email:"
                     type="email"
-                    name="pmail"
+                    name="email"
                     value={form.email}
                     onChange={handleChange}
                     required

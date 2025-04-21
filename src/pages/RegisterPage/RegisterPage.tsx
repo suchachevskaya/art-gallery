@@ -26,16 +26,17 @@ export const RegisterPage = () => {
 
         if (form.password !== form.confirmPassword) {
             setError('Пароли не совпадают');
+
             return;
         }
 
         // Здесь можно добавить логику отправки данных на сервер
-        console.log('Регистрационные данные:', form);
         setError('');
     };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
+        
         setForm((prevForm) => ({ ...prevForm, [name]: value }));
     };
 

@@ -1,26 +1,43 @@
-import style from './Card.module.scss';
-import styles from '@/components/FavIcon/FavIcon.module.scss';
+import cardStyle from './Card.module.scss';
+import favStyle from '@/components/FavIcon/FavIcon.module.scss';
 import { ReactComponent as FavIcon } from '@/assets/FavIcon.svg?react';
+import ArtImage from '../ArtImage/ArtImage';
+import { DEFAULT_LQIP_PLACEHOLDER } from "@/constants/placeholders"
 
 type ArtCardProps = {
   title: string;
   author: string;
-  imageUrl: string;
+  card: {
+    thumbnail: {
+      lqip: string;
+      width: number;
+      height: number;
+      alt_text: string;
+    } | null;
+    date_display: string;
+    image_id: string | null;
+  }
 };
 
-export function Card({ title, author, imageUrl }: ArtCardProps) {
+export function Card({ title, author, card }: ArtCardProps) {
   return (
-    <div className={style.card}>
-      <img src={imageUrl} alt={title} className={style.Art} />
-      <div className={style.content}>
-        <div className={style.header}>
+    <div className={cardStyle.card}>
+      <ArtImage
+        imageId={card.image_id}
+        alt={card.thumbnail?.alt_text || 'Image'}
+        lqip={card.thumbnail?.lqip || DEFAULT_LQIP_PLACEHOLDER}
+        width={300}
+        height={200}
+      />
+      <div className={cardStyle.content}>
+        <div className={cardStyle.header}>
           <div>
-            <h2 className={style.title}>{title}</h2>
-            <p className={style.author}>{author}</p>
+            <h2 title={title} className={cardStyle.title}>{title}</h2>
+            <p className={cardStyle.author}>{author}</p>
           </div>
-          <button className={style.favButton} aria-label="Добавить в избранное">
-            <div className={styles.svgWrapper}>
-              <FavIcon className={styles.favIcon} />
+          <button className={cardStyle.favButton} aria-label="Добавить в избранное">
+            <div className={favStyle.svgWrapper}>
+              <FavIcon className={favStyle.favIcon} />
             </div>
           </button>
         </div>

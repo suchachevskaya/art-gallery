@@ -1,31 +1,40 @@
+import { useSelector } from 'react-redux';
 import { Card } from "@/components/Card/Card";
-import { useState } from "react";
+import "./CardsHolder.scss"
+import { useState } from 'react';
+import { getCards } from '@/store/selectors';
 import { CardLink } from "@/components/Card/CardLink";
 
-const cardsData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 
 export function CardsHolder() {
 
+  const { cards, isLoading, error } = useSelector(getCards);
   const [showAll, setShowAll] = useState(false);
+
+  if (isLoading) return <p>Loading...</p>;
+
+  if (error) return <p>Error loading cards</p>;
 
   const handleShowAll = () => {
     setShowAll(true);
   };
-  
-  const visibleCards = showAll ? cardsData : cardsData.slice(0, 3);
+
+  const visibleCards = showAll ? cards : cards.slice(0, 3);
 
   return (
     <div className="cards-holder-wrapper">
       <div className="card-holder">
-      {visibleCards.map((cardId, index, data) => (
-          <CardLink key={index} cardId={cardId}>
+        {visibleCards.map((card) => (
+          <CardLink key={card.id} cardId={card.id}>
             <Card
-              key={index}
-              title="The Starry Night"
-              author="Vincent van Gogh"
-              imageUrl="https://upload.wikimedia.org/wikipedia/commons/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
+              key={card.id}
+              title={card.title}
+              author={card.artist_title}
+              card={card}
             />
           </CardLink>
+
         ))}
       </div>
 
