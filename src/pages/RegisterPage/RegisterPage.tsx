@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RegisterPage.scss';
 import {FormInput} from "@/components/FormInput/FormInput.tsx";
-import {ROUTES} from "@/routes";
+import {ROUTES} from "@/constants/routes";
 import {Link} from "react-router-dom";
 
 type RegisterForm = {
