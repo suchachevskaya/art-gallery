@@ -30,17 +30,6 @@ export const cardsApi = createApi({
           size: 12
         };
 
-
-
-        // // Преобразуем другие фильтры, если они есть
-        // filters.places.forEach(place => {
-        //   params.append('query[term][place_of_origin]', place);
-        // });
-
-        // filters.types.forEach(type => {
-        //   params.append('query[term][artwork_type_title]', type);
-        // });
-
         // Обязательные поля
         params.set(
           'fields',

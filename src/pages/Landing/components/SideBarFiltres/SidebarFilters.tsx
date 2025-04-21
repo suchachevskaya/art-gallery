@@ -4,16 +4,15 @@ import { setAuthors } from '@/store/cardsSlice';
 import { ArtistsData } from './constants'
 import { getAuthorIdFilter } from "@/store/selectors";
 import { FilterBlock } from "./components/FilterBlock"
+import { toggleItemInList } from "@/utils/ToggleItemInList";
 
 export function SidebarFilters() {
   const dispatch = useDispatch();
   const authors = useSelector(getAuthorIdFilter);
 
   const handleAuthorToggle = (artist_id: number) => {
-    const updated = authors.includes(artist_id)
-      ? authors.filter((a) => a !== artist_id)
-      : [...authors, artist_id];
-    
+    const updated = toggleItemInList(authors, artist_id)
+
     dispatch(setAuthors(updated));
   };
 
