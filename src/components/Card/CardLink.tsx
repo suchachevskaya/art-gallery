@@ -3,9 +3,11 @@ import { ROUTES } from "@/constants/routes";
 import { CARD_HISTORY_KEY } from "@/constants/constants";
 type CardLinkProps = {
   cardId: number;
+  /* eslint-disable-next-line no-undef */
   children: React.ReactNode;
 };
 
+/* eslint-disable-next-line no-undef */
 export const CardLink: React.FC<CardLinkProps> = ({ cardId, children }) => {
   const navigate = useNavigate();
   const handleSaveInHistory = () => {

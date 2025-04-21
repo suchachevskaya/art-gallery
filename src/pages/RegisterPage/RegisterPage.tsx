@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../components/FormInput/FormInput.scss';
 import {FormInput} from "@/components/FormInput/FormInput.tsx";
-import {ROUTES} from "@/routes";
+import {ROUTES} from "@/constants/routes";
 import {Link, useNavigate} from "react-router-dom";
 import {validateForm} from "@/components/Validation/Validation.tsx";
 
@@ -50,6 +50,7 @@ export const RegisterPage = () => {
 
             if (userExists) {
                 setError('User with this email or username already exists.');
+
                 return;
             }
 

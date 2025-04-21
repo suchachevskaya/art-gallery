@@ -1,10 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import {Link, Navigate} from "react-router-dom";
-import {ROUTES} from "@/routes";
+import {ROUTES} from "@/constants/routes";
 import {FormInput} from "@/components/FormInput/FormInput.tsx";
 import { validateForm } from '@/components/Validation/Validation.tsx';
-import './LoginPage.scss';
 
 
 
@@ -78,6 +77,7 @@ export const LoginPage = () => {
 
         setForm((prevForm) => ({ ...prevForm, [name]: value }));
         const newErrors = validateForm({ ...form, [name]: value });
+
         setErrors(newErrors);
     };
 
