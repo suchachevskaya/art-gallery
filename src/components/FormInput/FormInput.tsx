@@ -1,7 +1,17 @@
 import React from "react";
 
-export const FormInput = ({ label, type, name, value, onChange, required }) => {
-    return (
+type FormInputProps = {
+    label: string;
+    type: string;
+    name: string;
+    value: string;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    required?: boolean;
+    error?: string;
+}
+
+export const FormInput: React.FC<FormInputProps> = ({ label, type, name, value, onChange, required, error }) =>
+    (
         <div className="form-group">
             <label>{label}</label>
             <input
@@ -11,7 +21,6 @@ export const FormInput = ({ label, type, name, value, onChange, required }) => {
                 onChange={onChange}
                 required={required}
             />
+            {error && <div style={{ color: 'red' }}>{error}</div>}
         </div>
     );
-};
-
