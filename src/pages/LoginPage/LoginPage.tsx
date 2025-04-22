@@ -1,11 +1,14 @@
-
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import * as React from 'react';
 import {Link, Navigate} from "react-router-dom";
 import {ROUTES} from "@/constants/routes";
 import {FormInput} from "@/components/FormInput/FormInput.tsx";
 import { validateForm } from '@/components/Validation/Validation.tsx';
+import type {UserType} from "@/types/user.type.ts";
 
-
+const USER: string = 'user';
+const USERS: string = 'users';
+const ISLOGGEDIN: string = 'isLoggedIn';
 
 type LoginForm = {
     email: string;
@@ -23,12 +26,12 @@ export const LoginPage = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
+        const storedUser = localStorage.getItem(USER);
+        const storedIsLoggedIn = localStorage.getItem(ISLOGGEDIN);
 
         if (storedIsLoggedIn === 'true' && storedUser) {
             setIsLoggedIn(true);
-            setForm(JSON.parse(storedUser));
+            setForm(JSON.parse(storedUser) as LoginForm);
         }
     }, []);
 
@@ -48,15 +51,15 @@ export const LoginPage = () => {
         setErrors(formErrors);
 
         if (Object.keys(formErrors).length === 0) {
-            const usersJSON = localStorage.getItem('users');
-            const users = usersJSON ? JSON.parse(usersJSON) : [];
+            const usersJSON = localStorage.getItem(USERS);
+            const users: UserType[] = usersJSON ? JSON.parse(usersJSON) as UserType[] : [];
 
             const user = users.find((u: { email: string; password: string }) => u.email === form.email);
 
             if (user) {
                 if (user.password === form.password) {
-                    localStorage.setItem('user', JSON.stringify({ email: user.email }));
-                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem(USER, JSON.stringify({ email: user.email }));
+                    localStorage.setItem(ISLOGGEDIN, 'true');
                     setIsLoggedIn(true);
                     setError('');
                 } else {
