@@ -5,19 +5,15 @@ import {FormInput} from "@/components/FormInput/FormInput.tsx";
 import {ROUTES} from "@/constants/routes";
 import {Link, useNavigate} from "react-router-dom";
 import {validateForm} from "@/components/Validation/Validation.tsx";
+import type {UserType} from "@/types/user.type.ts";
 
+const USERS: string = 'users';
 
 type RegisterForm = {
     username: string;
     email: string;
     password: string;
     confirmPassword: string;
-};
-
-type User = {
-    username: string;
-    email: string;
-    password: string;
 };
 
 export const RegisterPage = () => {
@@ -47,8 +43,8 @@ export const RegisterPage = () => {
 
 
         if (Object.keys(formErrors).length === 0) {
-            const storedUsers = localStorage.getItem('users');
-            const users: User[] = storedUsers ? JSON.parse(storedUsers) as User[] : [];
+            const storedUsers = localStorage.getItem(USERS);
+            const users: UserType[] = storedUsers ? JSON.parse(storedUsers) as UserType[] : [];
 
             const userExists = users.some(
                 (user: { email: string; username: string }) =>
@@ -68,7 +64,7 @@ export const RegisterPage = () => {
             };
 
             users.push(newUser);
-            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem(USERS, JSON.stringify(users));
 
             setError('');
             alert('Registration successful! You can now log in.');
