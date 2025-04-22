@@ -6,6 +6,6 @@ LOGIN:"/login",
 SIGNUP:"/signup",
 INCARD:"/cards/:cardId",
 ALLARTWORKS: "artworks",
-ARTSEARCH: "artworks/search",
+ARTSEARCH: "/search",
 BASEURL: 'https://api.artic.edu/api/v1/'
 } as const;

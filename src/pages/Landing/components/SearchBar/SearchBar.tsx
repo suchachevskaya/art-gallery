@@ -10,10 +10,8 @@ export function SearchBar() {
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-          if (searchValue.trim().length > 0) {
             dispatch(setSearchValue(searchValue));
-          }
-        }, 300);
+        }, 500);
       
         return () => clearTimeout(timeout);
       }, [searchValue, dispatch]);

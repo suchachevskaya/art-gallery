@@ -11,6 +11,10 @@ export const cardsApi = createApi({
     getCards: builder.query<CardsData, GetCardsQueryArgs>({
       query: ({ page = 1, ...filters }) => {
         const params = new URLSearchParams();
+       
+        if (filters.searchValue?.trim()) {
+          params.set('q', filters.searchValue.trim());
+        }
 
         const body = {
           query: {
@@ -39,15 +43,16 @@ export const cardsApi = createApi({
         params.set('limit', '12');
         params.set('page', page.toString());
 
+
         if (hasFilters(filters)) {
           return {
-            url: ROUTES.ARTSEARCH,
+            url: `${ROUTES.ALLARTWORKS}${ROUTES.ARTSEARCH}`,
             method: 'POST',
             body,
           };
         }
-        
-        return `${ROUTES.ALLARTWORKS}?${params.toString()}`;
+
+        return `${ROUTES.ALLARTWORKS}${filters.searchValue?.trim() ? `${ROUTES.ARTSEARCH}` : ''}?${params.toString()}`;
       },
       transformResponse: (response: ApiResponse) => ({
 

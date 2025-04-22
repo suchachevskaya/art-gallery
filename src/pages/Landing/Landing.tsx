@@ -25,7 +25,7 @@ export function Landing() {
         page: currentPage, // Передаем параметр page отдельно
         ...filters
     });
-    const cardsData = useMemo(() => apiResponse?.cards ?? [], [apiResponse]);
+    const cardsData = useMemo(() => apiResponse?.cards ?? [], [apiResponse]);    
     const cardsRef = useRef(cardsData);
     const pagination = apiResponse?.pagination;
     const safeTotalPages = useSafeTotalPages(filters, pagination?.total_pages);
@@ -36,7 +36,7 @@ export function Landing() {
     };
 
     useEffect(() => {
-        if (cardsData.length > 0 && cardsRef.current !== cardsData) {
+        if (cardsRef.current !== cardsData) {
             dispatch(setCards(cardsData));
             cardsRef.current = cardsData
             dispatch(clearError())
