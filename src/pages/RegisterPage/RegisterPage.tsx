@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
+import * as React from 'react';
 import '../../components/FormInput/FormInput.scss';
 import {FormInput} from "@/components/FormInput/FormInput.tsx";
 import {ROUTES} from "@/constants/routes";
@@ -13,6 +14,12 @@ type RegisterForm = {
     confirmPassword: string;
 };
 
+type User = {
+    username: string;
+    email: string;
+    password: string;
+};
+
 export const RegisterPage = () => {
     const [form, setForm] = useState<RegisterForm>({
         username: '',
@@ -25,7 +32,7 @@ export const RegisterPage = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
 
@@ -41,7 +48,7 @@ export const RegisterPage = () => {
 
         if (Object.keys(formErrors).length === 0) {
             const storedUsers = localStorage.getItem('users');
-            const users = storedUsers ? JSON.parse(storedUsers) : [];
+            const users: User[] = storedUsers ? JSON.parse(storedUsers) as User[] : [];
 
             const userExists = users.some(
                 (user: { email: string; username: string }) =>
@@ -73,7 +80,7 @@ export const RegisterPage = () => {
                 confirmPassword: '',
             });
 
-            navigate(ROUTES.LOGIN);
+          await  navigate(ROUTES.LOGIN);
         } else {
             setError('Please correct the errors in the form.');
         }
@@ -81,7 +88,7 @@ export const RegisterPage = () => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        
+
         setForm((prevForm) => ({ ...prevForm, [name]: value }));
     };
 
