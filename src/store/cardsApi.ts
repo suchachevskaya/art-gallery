@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { ApiResponse, CardsData, Filters } from './types/CardType';
+import type { ApiResponse, CardsData, GetCardsQueryArgs } from './types/CardType';
 import { hasFilters } from '@/utils/checkFiltersExistence';
 import { ROUTES } from '@/constants/routes';
 import { FIELDS } from '@/constants/params';
@@ -8,8 +8,8 @@ export const cardsApi = createApi({
   reducerPath: 'cardsApi',
   baseQuery: fetchBaseQuery({ baseUrl: ROUTES.BASEURL }),
   endpoints: (builder) => ({
-    getCards: builder.query<CardsData, Filters>({
-      query: (filters) => {
+    getCards: builder.query<CardsData, GetCardsQueryArgs>({
+      query: ({ page = 1, ...filters }) => {
         const params = new URLSearchParams();
 
         const body = {
@@ -27,7 +27,8 @@ export const cardsApi = createApi({
           fields: [
             FIELDS
           ],
-          size: 12
+          size: 12,
+          from: (page - 1) * 12
         };
 
         // Обязательные поля
@@ -36,6 +37,7 @@ export const cardsApi = createApi({
           FIELDS
         );
         params.set('limit', '12');
+        params.set('page', page.toString());
 
         if (hasFilters(filters)) {
           return {
@@ -44,10 +46,11 @@ export const cardsApi = createApi({
             body,
           };
         }
-
+        
         return `${ROUTES.ALLARTWORKS}?${params.toString()}`;
       },
       transformResponse: (response: ApiResponse) => ({
+
         cards: response.data,
         pagination: response.pagination,
       }),

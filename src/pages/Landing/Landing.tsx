@@ -3,35 +3,55 @@ import { SearchBar } from "./components/SearchBar/SearchBar";
 import { CardsHolder } from "./components/CardsHolder/CardsHolder";
 import { SidebarFilters } from "./components/SideBarFiltres/SidebarFilters";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo } from 'react';
-import { setCards, setPagination, setLoading, setError } from '@/store/cardsSlice';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { setCards, setPagination, setError, setFetching, clearError } from '@/store/cardsSlice';
 import { useGetCardsQuery } from '@/store/cardsApi'
 import { getFilters } from '@/store/selectors';
+import { Pagination } from '@/components/Pagination/Pagination';
+import { useSafeTotalPages } from '@/utils/SafeTotalPages';
 
 export function Landing() {
     const dispatch = useDispatch();
     const filters = useSelector(getFilters);
+    const [currentPage, setCurrentPage] = useState(1);
+    
+    // сбрасываем страницу при смене фильтров
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [filters]);
+    
     // Получаем данные с использованием RTK Query
-    const { data: apiResponse, isLoading, error } = useGetCardsQuery(filters);
+    const { data: apiResponse, isLoading, isFetching, error } = useGetCardsQuery({
+        page: currentPage, // Передаем параметр page отдельно
+        ...filters
+    });
     const cardsData = useMemo(() => apiResponse?.cards ?? [], [apiResponse]);
-
+    const cardsRef = useRef(cardsData);
     const pagination = apiResponse?.pagination;
+    const safeTotalPages = useSafeTotalPages(filters, pagination?.total_pages);
+
+    // Функция для обработки изменения страницы
+    const handlePageChange = (newPage: number) => {
+        setCurrentPage(newPage); // Обновляем текущую страницу
+    };
 
     useEffect(() => {
-        if (cardsData.length > 0) {
+        if (cardsData.length > 0 && cardsRef.current !== cardsData) {
             dispatch(setCards(cardsData));
+            cardsRef.current = cardsData
+            dispatch(clearError())
         }
 
         if (pagination) {
             dispatch(setPagination(pagination));
         }
 
-        dispatch(setLoading(isLoading));
-        
+        dispatch(setFetching(isFetching));
+
         if (error) {
             dispatch(setError(error));
         }
-    }, [cardsData, pagination, isLoading, error, dispatch]);
+    }, [cardsData, pagination, isFetching, isLoading, error, dispatch]);
 
     return (
         <div className="landing">
@@ -41,7 +61,11 @@ export function Landing() {
                 <SidebarFilters />
                 <CardsHolder />
             </div>
-
+            <Pagination
+                currentPage={pagination?.current_page}
+                totalPages={safeTotalPages}
+                onPageChange={handlePageChange}
+            />
         </div>
     )
 
