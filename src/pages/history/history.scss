@@ -1,1 +1,26 @@
+@use '@/styles/variables' as *;
+.history-container {
+  .description-history{
 
+    text-align: center;
+    font-size: 36px;
+    line-height: normal;
+    font-family: Lexend Deca, sans-serif;
+    font-weight: 700;
+    margin: 0;
+    padding: 36px 0;
+    span{
+        color: $primary-color;
+      }
+
+  }
+  .history-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 80px;
+    margin-bottom: 60px;
+    max-width: 1800px;
+  }
+}

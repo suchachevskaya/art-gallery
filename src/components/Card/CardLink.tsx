@@ -14,15 +14,20 @@ export const CardLink: React.FC<CardLinkProps> = ({ cardId, children }) => {
     const historyStorage = JSON.parse(
       localStorage.getItem(CARD_HISTORY_KEY) || "[]"
     );
-    
-    if (!historyStorage.includes(cardId)) {
-      historyStorage.push(cardId);
+
+    const updateHistory = historyStorage.filter((id) => id !== cardId);
+    updateHistory.push(cardId);
+
+    if (updateHistory.length > 12) {
+      updateHistory.shift();
     }
-    localStorage.setItem(CARD_HISTORY_KEY, JSON.stringify(historyStorage));
+
+    localStorage.setItem(CARD_HISTORY_KEY, JSON.stringify(updateHistory));
   };
+
   const handleCardClick = () => {
     handleSaveInHistory();
-    const path = generatePath(ROUTES.INCARD, { cardId:cardId.toString() }); //generatePath принимает строку
+    const path = generatePath(ROUTES.INCARD, { cardId: cardId.toString() }); //generatePath принимает строку
     navigate(path);
   };
 

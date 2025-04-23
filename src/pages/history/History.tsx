@@ -1,21 +1,51 @@
 import "../history/history.scss";
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {CARD_HISTORY_KEY} from "@/constants/constants"
+import { CARD_HISTORY_KEY } from "@/constants/constants";
+import { useGetCardsByIdsQuery } from "@/store/cardsApi";
+import { CardLink } from "@/components/Card/CardLink";
+import { Card } from "@/components/Card/Card";
 
 export function History() {
-  const { cardId } = useParams(); // После подключения API будет использоваться для доступа к полному описании карточки по её id
-  const [history, setHistory] = useState<number[]>([]);
+  const [historyIds, setHistoryIds] = useState<number[]>([]);
 
   useEffect(() => {
     const storedHistory = JSON.parse(
       localStorage.getItem(CARD_HISTORY_KEY) || "[]"
     );
-
-    setHistory(storedHistory);
+    const filteredHistory = storedHistory.filter((id) => id !== null);
+    // console.log("Filtered history IDs:", filteredHistory);
+    setHistoryIds(filteredHistory);
   }, []);
+  const {
+    data: historyCards,
+    error,
+    isLoading,
+  } = useGetCardsByIdsQuery(historyIds, { skip: historyIds.length === 0 });
+  const sortedHistoryCards = historyCards?.slice().sort((a, b) => {
+    return historyIds.indexOf(a.id) - historyIds.indexOf(b.id);
+  });
+  
 
+  if (isLoading) return <p>Loading cards...</p>;
+  if (error) return <p>Error loading cards</p>;
+  if (!historyCards || historyCards === 0) return <p>No viewed content</p>;
   return (
-    <p>Viewed cards: {history.join(", ")}</p>
+    <div className="history-container">
+      <h2 className="description-history">
+        View <span> History</span>
+      </h2>
+      <div className="history-cards">
+      {sortedHistoryCards?.reverse().map((card: CardData) => (
+          <CardLink key={card.id} cardId={card.id}>
+            <Card
+              key={card.id}
+              title={card.title}
+              author={card.artist_title}
+              card={card}
+            />
+          </CardLink>
+        ))}
+      </div>
+    </div>
   );
 }
