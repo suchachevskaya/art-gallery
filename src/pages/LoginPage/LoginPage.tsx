@@ -5,6 +5,7 @@ import {ROUTES} from "@/constants/routes";
 import {FormInput} from "@/components/FormInput/FormInput.tsx";
 import { validateForm } from '@/components/Validation/Validation.tsx';
 import type {UserType} from "@/types/user.type.ts";
+import {useAuth} from "@/context/AuthContext.tsx";
 
 const USER: string = 'user';
 const USERS: string = 'users';
@@ -16,64 +17,50 @@ type LoginForm = {
 };
 
 export const LoginPage = () => {
-    const [form, setForm] = useState<LoginForm>({
-        email: '',
-        password: '',
-    });
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { login } = useAuth();
+    const [form, setForm] = useState<LoginForm>({ email: '', password: '' });
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [error, setError] = useState('');
+    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
         const storedUser = localStorage.getItem(USER);
         const storedIsLoggedIn = localStorage.getItem(ISLOGGEDIN);
 
         if (storedIsLoggedIn === 'true' && storedUser) {
-            setIsLoggedIn(true);
-            setForm(JSON.parse(storedUser) as LoginForm);
+            setRedirect(true);
         }
     }, []);
 
-    if (isLoggedIn) {
+    if (redirect) {
         return <Navigate to={ROUTES.HOME} />;
     }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
-
-        const formErrors = validateForm({
-            email: form.email,
-            password: form.password,
-        });
-
+        const formErrors = validateForm(form);
         setErrors(formErrors);
 
         if (Object.keys(formErrors).length === 0) {
             const usersJSON = localStorage.getItem(USERS);
-            const users: UserType[] = usersJSON ? JSON.parse(usersJSON) as UserType[] : [];
+            const users: UserType[] = usersJSON ? JSON.parse(usersJSON) : [];
 
-            const user = users.find((u: { email: string; password: string }) => u.email === form.email);
+            const user = users.find(u => u.email === form.email);
 
-            if (user) {
-                if (user.password === form.password) {
-                    localStorage.setItem(USER, JSON.stringify({ email: user.email }));
-                    localStorage.setItem(ISLOGGEDIN, 'true');
-                    setIsLoggedIn(true);
-                    setError('');
-                } else {
-                    setError('Incorrect password.');
-                }
+            if (user && user.password === form.password) {
+                localStorage.setItem(USER, JSON.stringify({ email: user.email }));
+                localStorage.setItem(ISLOGGEDIN, 'true');
+                login();  // глобальный вход
+                setRedirect(true);
+                setError('');
             } else {
-                setError('User with this email does not exist.');
+                setError(user ? 'Incorrect password.' : 'User with this email does not exist.');
             }
         } else {
             setError('Please correct the errors in the form.');
         }
-
-
     };
+
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
