@@ -21,8 +21,9 @@ export function History() {
     error,
     isLoading,
   } = useGetCardsByIdsQuery(historyIds, { skip: historyIds.length === 0 });
-  const sortedHistoryCards = historyCards?.slice().sort((a, b) => {
-    return historyIds.indexOf(a.id) - historyIds.indexOf(b.id);
+
+  const sortedHistoryCards = historyCards?.slice().sort((cardA, cardB) => {
+    return historyIds.indexOf(cardB.id) - historyIds.indexOf(cardA.id);
   });
   
 
@@ -35,7 +36,7 @@ export function History() {
         View <span> History</span>
       </h2>
       <div className="history-cards">
-      {sortedHistoryCards?.reverse().map((card: CardData) => (
+      {sortedHistoryCards?.map((card: CardData) => (
           <CardLink key={card.id} cardId={card.id}>
             <Card
               key={card.id}
