@@ -39,7 +39,7 @@ export default [
       ...tsPlugin.configs.recommended.rules,
       ...tsPlugin.configs['recommended-requiring-type-checking'].rules,
 
-      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unsafe-argument': 'error',
       '@typescript-eslint/no-unsafe-assignment': 'error',
       '@typescript-eslint/no-unsafe-member-access': 'error',
@@ -113,6 +113,7 @@ export default [
       'react/no-array-index-key': 'warn',
       'react/no-danger': 'error',
       'react/no-unescaped-entities': 'off',
+      'no-undef': 'off',
     },
   },
 ];

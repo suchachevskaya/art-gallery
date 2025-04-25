@@ -4,7 +4,7 @@ import { setAuthors } from '@/store/cardsSlice';
 import { ArtistsData } from './constants'
 import { getAuthorIdFilter } from "@/store/selectors";
 import { FilterBlock } from "./components/FilterBlock"
-import { toggleItemInList } from "@/utils/ToggleItemInList";
+import { toggleItemInList } from "@/utils/toggleItemInList";
 
 export function SidebarFilters() {
   const dispatch = useDispatch();

@@ -17,14 +17,14 @@
   }
 
   .show-all-button {
-    background: linear-gradient(145deg, $primary-color, $btn-primary-gradient);
+    background: linear-gradient(145deg, $primary-color, $btn-expand-gradient);
     margin-top: 60px;
     border: none;
     border-radius: 8px;
     padding: 12px 24px;
     font-size: 16px;
     font-weight: 600;
-    color: #ffffff;
+    color: $color-bg-light;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(56, 215, 7, 0.3);
@@ -34,13 +34,13 @@
     // вместо transition: all
 
     &:hover {
-      background: linear-gradient(145deg, $btn-primary-gradient, $primary-color);
+      background: linear-gradient(145deg, $btn-expand-gradient, $primary-color);
       box-shadow: 0 6px 16px rgba(56, 215, 7, 0.4);
       transform: translateY(-2px);
     }
 
     &:active {
-      background: #2ba600 !important; // важен при перекрытиях
+      background: $btn-expand-active !important; // важен при перекрытиях
       transition: none; // мгновенно применить
       box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
       transform: translateY(1px);

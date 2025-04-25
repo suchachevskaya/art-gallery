@@ -11,7 +11,7 @@ export function CardsHolder() {
   const { cards, isFetching, error } = useSelector(getCards);
   const [showAll, setShowAll] = useState(false);
   const [delayedLoading, setDelayedLoading] = useState(false);
-  // eslint-disable-next-line no-undef
+
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {

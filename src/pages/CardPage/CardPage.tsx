@@ -3,6 +3,8 @@ import { ReactComponent as FavIcon } from "@/assets/FavIcon.svg?react";
 import styles from "@/components/FavIcon/FavIcon.module.scss";
 import notFound from "@/assets/notFound.png";
 import { hgroupItem } from "./constants";
+
+
 export function CardPage() {
 
   return (

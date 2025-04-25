@@ -1,23 +1,21 @@
+// import { useState } from "react";
+import { generateListOfPages } from "@/utils/generateListOfPages";
 import "./Pagination.scss";
+import { range } from "./constants";
 
-interface PaginationProps {
-    currentPage?: number;
-    totalPages?: number;
+type PaginationProps = {
     onPageChange: (page: number) => void;
+    currentPage: number;
+    totalPages?: number;
 }
 
 export function Pagination({ currentPage = 1, totalPages, onPageChange }: PaginationProps) {
-    // Проверяем, что totalPages корректно передан (не null и не undefined)
-    if (totalPages == undefined || totalPages <= 0) {
-        return null;
+
+    if (!totalPages) {
+        totalPages = 0
     }
 
-    const pageNumbers = [];
-
-    // Генерация списка страниц
-    for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(i);
-    }
+    const pageNumbers = generateListOfPages(totalPages);
 
     // Обработка изменения страницы
     const handlePageChange = (newPage: number) => {
@@ -27,7 +25,6 @@ export function Pagination({ currentPage = 1, totalPages, onPageChange }: Pagina
     };
 
     // Логика вывода только нескольких страниц
-    const range = 2; // Количество соседних страниц
     const startPage = Math.max(1, currentPage - range);
     const endPage = Math.min(totalPages, currentPage + range);
 

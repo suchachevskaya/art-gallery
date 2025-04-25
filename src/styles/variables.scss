@@ -1,8 +1,15 @@
 $color-bg-light: #f5f5f5; // Один из 2-ух основных цветов (для заднего фона)
 $color-bg-dark:#666; //цвет для хедера
 $primary-color: #38d707;  // Один из 2-ух основных цветов (для различных элементов интерфейса типа кнопок, подчеркиваний, текста и тд.)
-$color-background: #f5f5f5;
-$reserve-color:#38d707; //цвет текста в хедер(на темном фоне)
-$btn-primary-gradient: #32c106; // Градиент для кнопки
-
-
+$btn-expand-gradient: #32c106; // Градиент для кнопки
+$btn-expand-active: #2ba600;
+$border-color-gray: #ccc;
+$pagination-btn-action: #007bff;
+$pagination-btn-color: white;
+$card-title-color: #222;
+$card-author-color: #666;
+$card-background-color: #fff;
+$search-bar-focus: #3498db;
+$sidebar-filter-title:  #1c1c1c;
+$sidebar-filter-name:  #222;
+$sidebar-filter-count: #666;
