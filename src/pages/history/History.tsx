@@ -15,7 +15,7 @@ export function History({ cards=[] }: HistoryProps) {
       </h2>
       <div className="history-cards">
         {cards.map((card: CardData) => (
-          <CardLink key={card.id} cardId={card.id}>
+          <CardLink key={card.id} cardHistory={card}>
             <Card
               key={card.id}
               title={card.title}
