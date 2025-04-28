@@ -9,6 +9,7 @@ type CardLinkProps = {
 };
 type HistoryStorageProps = CardData[];
 
+
 export function CardLink({ cardHistory, children }: CardLinkProps) {
   const navigate = useNavigate();
   const handleSaveInHistory = () => {

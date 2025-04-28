@@ -61,5 +61,11 @@ export type CardsState = {
     cards: CardData[];
     pagination: Pagination;
     isLoading: boolean;
+    isFetching: boolean;
     error: FetchBaseQueryError | SerializedError | null;
 };
+
+export type GetCardsQueryArgs = {
+    page?: number
+} & Filters;
+

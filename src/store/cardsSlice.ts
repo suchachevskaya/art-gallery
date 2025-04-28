@@ -20,6 +20,7 @@ const initialState: CardsState = {
     next_url: '',
   },
   isLoading: false,
+  isFetching: false,
   error: null,
 };
 
@@ -56,9 +57,16 @@ const cardsSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
+    setFetching: (state, action: PayloadAction<boolean>) => {
+      state.isFetching = action.payload;
+    },
     setError: (state, action: PayloadAction<FetchBaseQueryError | SerializedError>) => {
       state.error = action.payload;
     },
+    clearError: (state) => {
+      state.error = null;
+    }
+    
   },
 });
 
@@ -71,7 +79,9 @@ export const {
   setCards,
   setPagination,
   setLoading,
+  setFetching,
   setError,
+  clearError
 } = cardsSlice.actions;
 
 export const cardsReducer = cardsSlice.reducer;

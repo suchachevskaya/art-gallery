@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { ApiResponse, CardData, CardsData, Filters, SingleCardResponse } from './types/CardType';
+import type { ApiResponse, CardData, CardsData, SingleCardResponse, GetCardsQueryArgs } from './types/CardType';
 import { hasFilters } from '@/utils/checkFiltersExistence';
 import { ROUTES } from '@/constants/routes';
 import { FIELDS } from '@/constants/params';
@@ -8,9 +8,13 @@ export const cardsApi = createApi({
   reducerPath: 'cardsApi',
   baseQuery: fetchBaseQuery({ baseUrl: ROUTES.BASEURL }),
   endpoints: (builder) => ({
-    getCards: builder.query<CardsData, Filters>({
-      query: (filters) => {
+    getCards: builder.query<CardsData, GetCardsQueryArgs>({
+      query: ({ page = 1, ...filters }) => {
         const params = new URLSearchParams();
+       
+        if (filters.searchValue?.trim()) {
+          params.set('q', filters.searchValue.trim());
+        }
 
         const body = {
           query: {
@@ -27,7 +31,8 @@ export const cardsApi = createApi({
           fields: [
             FIELDS
           ],
-          size: 12
+          size: 12,
+          from: (page - 1) * 12
         };
 
         // Обязательные поля
@@ -36,18 +41,21 @@ export const cardsApi = createApi({
           FIELDS
         );
         params.set('limit', '12');
+        params.set('page', page.toString());
+
 
         if (hasFilters(filters)) {
           return {
-            url: ROUTES.ARTSEARCH,
+            url: `${ROUTES.ALLARTWORKS}${ROUTES.ARTSEARCH}`,
             method: 'POST',
             body,
           };
         }
 
-        return `${ROUTES.ALLARTWORKS}?${params.toString()}`;
+        return `${ROUTES.ALLARTWORKS}${filters.searchValue?.trim() ? `${ROUTES.ARTSEARCH}` : ''}?${params.toString()}`;
       },
       transformResponse: (response: ApiResponse) => ({
+
         cards: response.data,
         pagination: response.pagination,
       }),

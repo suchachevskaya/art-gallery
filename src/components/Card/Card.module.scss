@@ -1,10 +1,12 @@
+@use "@/styles/variables" as *;
+
 .card {
   width: 300px;
   max-height: 272px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: $card-background-color;
   transition: transform 0.2s;
 
   &:hover {
@@ -34,7 +36,7 @@
   font-size: 18px;
   font-weight: 600;
   margin: 0;
-  color: #222;
+  color: $card-title-color;
 
   max-width: 220px;         // Максимальная ширина текста
   white-space: nowrap;      // Запрещаем перенос строк
@@ -44,14 +46,19 @@
 
 .author {
   font-size: 14px;
-  color: #666;
+  color: $card-author-color;
   margin: 0;
+
+  max-width: 220px;         // Максимальная ширина текста
+  white-space: nowrap;      // Запрещаем перенос строк
+  overflow: hidden;         // Скрываем выходящий за пределы текст
+  text-overflow: ellipsis;  // Многоточие
 }
 
 .favButton {
   background: transparent;
   border: none;
-  color: #38d707;
+  color: $primary-color;
   font-size: 26px;
   cursor: pointer;
   padding: 0;

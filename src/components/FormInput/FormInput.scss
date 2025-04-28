@@ -45,7 +45,7 @@
 button[type="submit"] {
   width: 100%;
   padding: 20px;
-  background-color: $btn-primary-gradient;
+  background-color: $primary-color;
   color: white;
   border: none;
   border-radius: 5px;
@@ -55,5 +55,5 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: $btn-primary-gradient;
+  background-color: $primary-color;
 }

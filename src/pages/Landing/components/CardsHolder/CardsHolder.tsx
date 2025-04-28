@@ -1,18 +1,43 @@
 import { useSelector } from 'react-redux';
 import { Card } from "@/components/Card/Card";
 import "./CardsHolder.scss"
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getCards } from '@/store/selectors';
 import { CardLink } from "@/components/Card/CardLink";
 
 
 
 export function CardsHolder() {
-
-  const { cards, isLoading, error } = useSelector(getCards);
+  const { cards, isFetching, error } = useSelector(getCards);
   const [showAll, setShowAll] = useState(false);
+  const [delayedLoading, setDelayedLoading] = useState(false);
 
-  if (isLoading) return <p>Loading...</p>;
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (isFetching) {
+      // запускаем таймер на показ loading
+      timeoutRef.current = setTimeout(() => {
+        setDelayedLoading(true);
+      }, 1000);
+    } else {
+      // если данные пришли быстрее — не показываем loading
+      setDelayedLoading(false);
+      
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    }
+
+    // на размонтирование или смену isFetching — чистим
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [isFetching]);
+
+  if (delayedLoading) return <p>Loading...</p>;
 
   if (error) return <p>Error loading cards</p>;
 
