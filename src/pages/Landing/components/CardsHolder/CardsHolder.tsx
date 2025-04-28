@@ -51,7 +51,7 @@ export function CardsHolder() {
     <div className="cards-holder-wrapper">
       <div className="card-holder">
         {visibleCards.map((card) => (
-          <CardLink key={card.id} cardId={card.id}>
+          <CardLink key={card.id} cardHistory={card}>
             <Card
               key={card.id}
               title={card.title}

@@ -2,34 +2,68 @@ import "../CardPage/cardPage.scss";
 import { ReactComponent as FavIcon } from "@/assets/FavIcon.svg?react";
 import styles from "@/components/FavIcon/FavIcon.module.scss";
 import notFound from "@/assets/notFound.png";
-import { hgroupItem } from "./constants";
-
+import { useGetCardByIdQuery } from "@/store/cardsApi";
+import { useParams } from "react-router";
+import { createImgSource } from "@/utils/createImgSource";
 
 export function CardPage() {
+  const { cardId } = useParams();
+  const {
+    data: fetchedCard,
+    error,
+    isLoading,
+  } = useGetCardByIdQuery(Number(cardId));
+
+  console.log("fetchedCard:", fetchedCard);
+
+  if (isLoading) return <p>Loading card...</p>;
+
+  if (error || !fetchedCard) return <p>Error loading card</p>;
 
   return (
     <div className="card-page">
       <figure className="card-page__figure">
         <div className="card-page__wrapper">
-          <img src={notFound} alt="notFound" />
+        <img className="card-page__img"
+          src={createImgSource(fetchedCard.image_id, 800)}
+          alt={fetchedCard.thumbnail?.alt_text || notFound}
+        />
         </div>
-       <FavIcon className={`card-page__fav-icon ${styles.favIcon}`} />  {/* При реализации функционала избранного будет создан отдельный компонент для кнопки */}
+        <FavIcon className={`card-page__fav-icon ${styles.favIcon}`} />
+        {/* При реализации функционала избранного будет создан отдельный компонент для кнопки */}
       </figure>
-
       <figcaption className="card-page__caption">
         <hgroup className="card-page__header">
-          <h2 className="card-page__title">Punch Pot</h2>
-          <p className="card-page__subtitle">England, Stalfordshire</p>
+          <h2 className="card-page__title">{fetchedCard.title}</h2>
+          <p className="card-page__subtitle">{fetchedCard.place_of_origin}</p>
         </hgroup>
         <hgroup className="card-page__overview">
           <h1 className="card-page__overview-title">Overview</h1>
-          {hgroupItem.map((item) => (
-            <div key={item.id} className="card-page__detail">
-              <p className="card-page__detail-title">{item.title}</p>
-              <p className="card-page__detail-text"> {item.text}</p>
-            </div>
-          ))}
-          <p className="card-page__status">Public</p>
+          <div className="card-page__detail">
+            <h3 className="card-page__section-title">Basic Information</h3>
+            <p className="card-page__detail-title">
+              Artist: <span>{fetchedCard.artist_title}</span>
+            </p>
+            <p className="card-page__detail-title">
+              Year of Creation: <span>{fetchedCard.date_display}</span>
+            </p>
+            <p className="card-page__detail-title">
+              Credit: <span>{fetchedCard.credit_line}</span>
+            </p>
+          </div>
+          <div className="card-page__detail">
+            <h3 className="card-page__section-title">Technical Details</h3>
+            <p className="card-page__detail-title">
+              Dimensions: <span>{fetchedCard.dimensions}</span>
+            </p>
+            <p className="card-page__detail-title">
+              Description:
+              <span>
+                {fetchedCard.thumbnail?.alt_text || "No description available"}
+              </span>
+            </p>
+          </div>
+          <p className="card-page__status">Public Domain</p>
         </hgroup>
       </figcaption>
     </div>
