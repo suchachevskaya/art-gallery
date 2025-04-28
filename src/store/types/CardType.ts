@@ -15,6 +15,9 @@ export type CardData = {
     date_start: number;
     date_end: number;
     image_id: string | null;  // ID изображения
+    place_of_origin:string;//Место происхождения
+    credit_line:string;//Указание коллекции или дарителя
+    dimensions:string;//Размеры
 };
 
 export type Pagination = {
@@ -39,6 +42,12 @@ export type ApiResponse = {
     info: string;
     config: string;
 };
+export type SingleCardResponse={
+    preference: string;
+    data:CardData;//Одна карточка
+    info:string;
+    config:string;
+}
 
 export type Filters = {
     searchValue?: string;
@@ -52,5 +61,11 @@ export type CardsState = {
     cards: CardData[];
     pagination: Pagination;
     isLoading: boolean;
+    isFetching: boolean;
     error: FetchBaseQueryError | SerializedError | null;
 };
+
+export type GetCardsQueryArgs = {
+    page?: number
+} & Filters;
+

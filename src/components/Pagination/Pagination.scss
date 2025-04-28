@@ -1,0 +1,33 @@
+@use "@/styles/variables" as *;
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 45px;
+}
+
+.pagination-btn {
+    background-color: $color-bg-light;
+    border: 1px solid $border-color-gray;
+    padding: 8px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.pagination-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: $pagination-btn-action;
+    color: $pagination-btn-color;
+}
+
+.pagination-btn.active {
+    background-color: $pagination-btn-action;
+    color: $pagination-btn-color;
+}

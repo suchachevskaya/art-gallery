@@ -3,23 +3,25 @@ import { useDispatch } from 'react-redux';
 import { setSearchValue } from '@/store/cardsSlice';
 import "./Searchbar.scss"
 
-export function SearchBar() {
+type SearchBarProps = {
+    placeholderText: string
+}
+
+export function SearchBar({placeholderText}: SearchBarProps) {
 
     const dispatch = useDispatch();
     const [searchValue, setLocalSearchValue] = useState('');
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-          if (searchValue.trim().length > 0) {
             dispatch(setSearchValue(searchValue));
-          }
-        }, 300);
-      
+        }, 500);
+
         return () => clearTimeout(timeout);
-      }, [searchValue, dispatch]);
-      
-    // eslint-disable-next-line no-undef
-    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    }, [searchValue, dispatch]);
+
+
+    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLocalSearchValue(e.target.value)
     }
 
@@ -28,7 +30,7 @@ export function SearchBar() {
             <div className="search-filt">
                 <input
                     type="text"
-                    placeholder="Search, art, artist, work..."
+                    placeholder={placeholderText}
                     value={searchValue}
                     onChange={handleSearchInput}
                 />

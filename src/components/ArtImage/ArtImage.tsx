@@ -4,9 +4,9 @@ import { createImgSource } from '@/utils/createImgSource';
 
 type ArtImageProps = {
   imageId: string | null
-  alt?: string
   width: number
   height: number
+  alt?: string
   lqip?: string
 }
 
