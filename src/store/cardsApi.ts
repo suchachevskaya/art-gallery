@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { ApiResponse, CardsData, Filters } from './types/CardType';
+import type { ApiResponse, CardData, CardsData, Filters, SingleCardResponse } from './types/CardType';
 import { hasFilters } from '@/utils/checkFiltersExistence';
 import { ROUTES } from '@/constants/routes';
 import { FIELDS } from '@/constants/params';
@@ -53,7 +53,15 @@ export const cardsApi = createApi({
       }),
     }),
 
+    getCardById: builder.query<CardData, number>({
+      query: (id) => ({
+        url: `${ROUTES.ALLARTWORKS}/${id}`,
+        method: 'GET',
+      }),
+      transformResponse: (response: SingleCardResponse) => response.data,
+    })
+
   }),
 });
 
-export const { useGetCardsQuery } = cardsApi;
+export const { useGetCardsQuery, useGetCardByIdQuery } = cardsApi;

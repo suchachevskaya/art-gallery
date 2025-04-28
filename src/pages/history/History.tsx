@@ -1,21 +1,30 @@
 import "../history/history.scss";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import {CARD_HISTORY_KEY} from "@/constants/constants"
+import { CardLink } from "@/components/Card/CardLink";
+import { Card } from "@/components/Card/Card";
+import type { CardData } from "@/store/types/CardType";
 
-export function History() {
-  const { cardId } = useParams(); // После подключения API будет использоваться для доступа к полному описании карточки по её id
-  const [history, setHistory] = useState<number[]>([]);
+type HistoryProps = {
+  cards: CardData[];
+};
 
-  useEffect(() => {
-    const storedHistory = JSON.parse(
-      localStorage.getItem(CARD_HISTORY_KEY) || "[]"
-    );
-
-    setHistory(storedHistory);
-  }, []);
-
+export function History({ cards=[] }: HistoryProps) {
   return (
-    <p>Viewed cards: {history.join(", ")}</p>
+    <div className="history-container">
+      <h2 className="description-history">
+        View <span> History</span>
+      </h2>
+      <div className="history-cards">
+        {cards.map((card: CardData) => (
+          <CardLink key={card.id} cardHistory={card}>
+            <Card
+              key={card.id}
+              title={card.title}
+              author={card.artist_title}
+              card={card}
+            />
+          </CardLink>
+        ))}
+      </div>
+    </div>
   );
 }
