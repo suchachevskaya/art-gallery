@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
+import * as React from 'react';
 import '../../components/FormInput/FormInput.scss';
 import {FormInput} from "@/components/FormInput/FormInput.tsx";
 import {ROUTES} from "@/constants/routes";
 import {Link, useNavigate} from "react-router-dom";
 import {validateForm} from "@/components/Validation/Validation.tsx";
+import type {UserType} from "@/store/types/user.type";
 
+const USERS: string = 'users';
 
 type RegisterForm = {
     username: string;
@@ -25,7 +28,7 @@ export const RegisterPage = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
 
@@ -40,8 +43,8 @@ export const RegisterPage = () => {
 
 
         if (Object.keys(formErrors).length === 0) {
-            const storedUsers = localStorage.getItem('users');
-            const users = storedUsers ? JSON.parse(storedUsers) : [];
+            const storedUsers = localStorage.getItem(USERS);
+            const users: UserType[] = storedUsers ? JSON.parse(storedUsers) as UserType[] : [];
 
             const userExists = users.some(
                 (user: { email: string; username: string }) =>
@@ -61,7 +64,7 @@ export const RegisterPage = () => {
             };
 
             users.push(newUser);
-            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem(USERS, JSON.stringify(users));
 
             setError('');
             alert('Registration successful! You can now log in.');
@@ -73,7 +76,7 @@ export const RegisterPage = () => {
                 confirmPassword: '',
             });
 
-            navigate(ROUTES.LOGIN);
+          await  navigate(ROUTES.LOGIN);
         } else {
             setError('Please correct the errors in the form.');
         }
@@ -81,7 +84,7 @@ export const RegisterPage = () => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        
+
         setForm((prevForm) => ({ ...prevForm, [name]: value }));
     };
 

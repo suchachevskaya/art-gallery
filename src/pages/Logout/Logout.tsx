@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Logout.scss"
 
 type LogoutButtonProps = {
     onLogout: () => void;
@@ -6,7 +7,7 @@ type LogoutButtonProps = {
 
 export const LogoutButton: React.FC<LogoutButtonProps> = ({ onLogout }) => {
     return (
-        <button onClick={onLogout}>
+        <button className={`logout`} onClick={onLogout}>
             Logout
         </button>
     );

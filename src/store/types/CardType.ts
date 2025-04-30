@@ -5,12 +5,6 @@ export type CardData = {
     id: number;  // ID картины
     title: string;  // Название картины
     artist_title: string;  // Название художника
-    thumbnail: {  // Информация о миниатюре изображения
-        lqip: string;  // Base64 изображение
-        width: number;  // Ширина изображения
-        height: number;  // Высота изображения
-        alt_text: string;  // Альтернативный текст для изображения
-    } | null;
     date_display: string;  // Год или дата отображения
     date_start: number;
     date_end: number;
@@ -18,6 +12,12 @@ export type CardData = {
     place_of_origin:string;//Место происхождения
     credit_line:string;//Указание коллекции или дарителя
     dimensions:string;//Размеры
+    thumbnail: {  // Информация о миниатюре изображения
+        lqip: string;  // Base64 изображение
+        width: number;  // Ширина изображения
+        height: number;  // Высота изображения
+        alt_text: string;  // Альтернативный текст для изображения
+    } | null;
 };
 
 export type Pagination = {
@@ -50,15 +50,15 @@ export type SingleCardResponse={
 }
 
 export type Filters = {
-    searchValue?: string;
     artist_id: number[];
     places: string[];
     types: string[];
+    searchValue?: string;
 };
 
 export type CardsState = {
     filters: Filters;
-    cards: CardData[];
+    cards: PreviewCard[];
     pagination: Pagination;
     isLoading: boolean;
     isFetching: boolean;
@@ -69,3 +69,13 @@ export type GetCardsQueryArgs = {
     page?: number
 } & Filters;
 
+export type PreviewCard = {
+  id: number;
+  title: string;
+  artist_title: string;
+  image_id: string | null;
+  thumbnail?: {
+    alt_text: string;
+    lqip: string;
+  };
+};

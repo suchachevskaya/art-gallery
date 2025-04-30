@@ -1,27 +1,34 @@
 import cardStyle from './Card.module.scss';
-import favStyle from '@/components/FavIcon/FavIcon.module.scss';
-import { ReactComponent as FavIcon } from '@/assets/FavIcon.svg?react';
-import ArtImage from '../ArtImage/ArtImage';
+import { ArtImage } from '../ArtImage/ArtImage';
 import { DEFAULT_LQIP_PLACEHOLDER } from "@/constants/placeholders"
+import { toggleCard } from '@/utils/toggleCard';
+import type { PreviewCard  } from '@/store/types/CardType';
+import { useEffect, useState } from 'react';
+import { FAVORITES_LS_KEY } from '@/constants/constants';
+import { FavIcon } from '../FavIcon/FavIcon';
+import { isInLS } from '@/utils/isInList';
 
 type ArtCardProps = {
-  title: string;
-  author: string;
-  card: {
-    thumbnail: {
-      lqip: string;
-      width: number;
-      height: number;
-      alt_text: string;
-    } | null;
-    date_display: string;
-    image_id: string | null;
-  }
+  card: PreviewCard 
 };
 
-export function Card({ title, author, card }: ArtCardProps) {
+export function Card({ card }: ArtCardProps) {
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    setIsFavorite(isInLS(FAVORITES_LS_KEY, card));
+  }, [card]); // обновляется при монтировании и смене карточки
+
+  const handleFavoriteToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation(); 
+    // Операция добавления/удаления карточки из избранного
+    toggleCard(card, FAVORITES_LS_KEY);
+    setIsFavorite((prev) => !prev); 
+  };
+
   return (
-    <div className={cardStyle.card}>
+    <div className={cardStyle.card} onClick={() => {/* Навигация на подробную карточку */ }}>
       <ArtImage
         imageId={card.image_id}
         alt={card.thumbnail?.alt_text || 'Image'}
@@ -32,17 +39,18 @@ export function Card({ title, author, card }: ArtCardProps) {
       <div className={cardStyle.content}>
         <div className={cardStyle.header}>
           <div>
-            <h2 title={title} className={cardStyle.title}>{title}</h2>
-            <p className={cardStyle.author}>{author}</p>
+            <h2 title={card.title} className={cardStyle.title}>{card.title}</h2>
+            <p title={card.artist_title} className={cardStyle.author}>{card.artist_title}</p>
           </div>
-          <button className={cardStyle.favButton} aria-label="Добавить в избранное">
-            <div className={favStyle.svgWrapper}>
-              <FavIcon className={favStyle.favIcon} />
-            </div>
+          <button
+            className={cardStyle.favButton}
+            aria-label="Избранное"
+            onClick={handleFavoriteToggle}
+          >
+            <FavIcon isFavorite={isFavorite}/>
           </button>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

@@ -24,6 +24,14 @@ export default [
           jsx: true,
         },
       },
+      ecmaVersion: 2021,
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        localStorage: 'readonly',
+        console: 'readonly',
+        Promise: 'readonly',
+      },
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
