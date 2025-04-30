@@ -4,7 +4,7 @@ import {Link, Navigate} from "react-router-dom";
 import {ROUTES} from "@/constants/routes";
 import {FormInput} from "@/components/FormInput/FormInput.tsx";
 import { validateForm } from '@/components/Validation/Validation.tsx';
-import type {UserType} from "@/types/user.type.ts";
+import type {UserType} from "@/store/types/user.type";
 import {useAuth} from "@/context/AuthContext.tsx";
 
 const USER: string = 'user';
@@ -39,11 +39,12 @@ export const LoginPage = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formErrors = validateForm(form);
+
         setErrors(formErrors);
 
         if (Object.keys(formErrors).length === 0) {
             const usersJSON = localStorage.getItem(USERS);
-            const users: UserType[] = usersJSON ? JSON.parse(usersJSON) : [];
+            const users: UserType[] = usersJSON ? JSON.parse(usersJSON) as UserType[] : [];
 
             const user = users.find(u => u.email === form.email);
 

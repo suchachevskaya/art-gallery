@@ -1,74 +1,56 @@
 import cardStyle from './Card.module.scss';
-import favStyle from '@/components/FavIcon/FavIcon.module.scss';
-import { ReactComponent as FavIcon } from '@/assets/FavIcon.svg?react';
-import ArtImage from '../ArtImage/ArtImage';
+import { ArtImage } from '../ArtImage/ArtImage';
 import { DEFAULT_LQIP_PLACEHOLDER } from "@/constants/placeholders"
-import {toggleFavorite} from "@/store/favoritesActions.ts";
-import {useDispatch} from "react-redux";
+import { toggleCard } from '@/utils/toggleCard';
+import type { PreviewCard  } from '@/store/types/CardType';
+import { useEffect, useState } from 'react';
+import { FAVORITES_LS_KEY } from '@/constants/constants';
+import { FavIcon } from '../FavIcon/FavIcon';
+import { isInLS } from '@/utils/isInList';
 
 type ArtCardProps = {
-  title: string;
-  author: string;
-  card: {
-    thumbnail: {
-      lqip: string;
-      width: number;
-      height: number;
-      alt_text: string;
-    } | null;
-    date_display: string;
-    image_id: string | null;
-  }
+  card: PreviewCard 
 };
 
-export function Card({ title, author, card }: ArtCardProps) {
-  const dispatch = useDispatch();
+export function Card({ card }: ArtCardProps) {
 
-  // Функция для получения избранных карточек из localStorage
-  const getFavoritesFromLocalStorage = (): { image_id: string | null }[] => {
-    const favorites = localStorage.getItem('favorites');
-    return favorites ? JSON.parse(favorites) : [];
-  };
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  // Проверяем, является ли текущая карточка избранной
-  const isFavorite = getFavoritesFromLocalStorage().some(
-      (item) => item.image_id === card.image_id
-  );
+  useEffect(() => {
+    setIsFavorite(isInLS(FAVORITES_LS_KEY, card));
+  }, [card]); // обновляется при монтировании и смене карточки
 
   const handleFavoriteToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation(); // Чтобы не произошло навигации
+    e.stopPropagation(); 
     // Операция добавления/удаления карточки из избранного
-    dispatch(toggleFavorite({ image_id: card.image_id, title, author }));
+    toggleCard(card, FAVORITES_LS_KEY);
+    setIsFavorite((prev) => !prev); 
   };
 
   return (
-      <div className={cardStyle.card} onClick={() => {/* Навигация на подробную карточку */}}>
-        <ArtImage
-            imageId={card.image_id}
-            alt={card.thumbnail?.alt_text || 'Image'}
-            lqip={card.thumbnail?.lqip || DEFAULT_LQIP_PLACEHOLDER}
-            width={300}
-            height={200}
-        />
-        <div className={cardStyle.content}>
-          <div className={cardStyle.header}>
-            <div>
-              <h2 title={title} className={cardStyle.title}>{title}</h2>
-              <p className={cardStyle.author}>{author}</p>
-            </div>
-            <button
-                className={cardStyle.favButton}
-                aria-label="Избранное"
-                onClick={handleFavoriteToggle}
-            >
-              <div className={favStyle.svgWrapper}>
-                <FavIcon
-                    className={`${favStyle.favIcon} ${isFavorite ? favStyle.active : ''}`}
-                />
-              </div>
-            </button>
+    <div className={cardStyle.card} onClick={() => {/* Навигация на подробную карточку */ }}>
+      <ArtImage
+        imageId={card.image_id}
+        alt={card.thumbnail?.alt_text || 'Image'}
+        lqip={card.thumbnail?.lqip || DEFAULT_LQIP_PLACEHOLDER}
+        width={300}
+        height={200}
+      />
+      <div className={cardStyle.content}>
+        <div className={cardStyle.header}>
+          <div>
+            <h2 title={card.title} className={cardStyle.title}>{card.title}</h2>
+            <p title={card.artist_title} className={cardStyle.author}>{card.artist_title}</p>
           </div>
+          <button
+            className={cardStyle.favButton}
+            aria-label="Избранное"
+            onClick={handleFavoriteToggle}
+          >
+            <FavIcon isFavorite={isFavorite}/>
+          </button>
         </div>
       </div>
+    </div>
   );
 }

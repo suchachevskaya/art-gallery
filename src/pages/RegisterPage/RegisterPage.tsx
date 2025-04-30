@@ -5,7 +5,7 @@ import {FormInput} from "@/components/FormInput/FormInput.tsx";
 import {ROUTES} from "@/constants/routes";
 import {Link, useNavigate} from "react-router-dom";
 import {validateForm} from "@/components/Validation/Validation.tsx";
-import type {UserType} from "@/types/user.type.ts";
+import type {UserType} from "@/store/types/user.type";
 
 const USERS: string = 'users';
 

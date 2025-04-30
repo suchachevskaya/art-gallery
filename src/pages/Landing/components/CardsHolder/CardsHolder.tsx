@@ -54,8 +54,6 @@ export function CardsHolder() {
           <CardLink key={card.id} cardHistory={card}>
             <Card
               key={card.id}
-              title={card.title}
-              author={card.artist_title}
               card={card}
             />
           </CardLink>

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./Logout.scss"
 
 type LogoutButtonProps = {
     onLogout: () => void;

@@ -10,7 +10,7 @@ type ArtImageProps = {
   lqip?: string
 }
 
-export default function ArtImage({
+export function ArtImage({
   imageId,
   alt = '',
   width = 600,

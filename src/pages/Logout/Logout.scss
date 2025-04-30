@@ -1,0 +1,20 @@
+@use "@/styles/variables.scss" as *;
+
+.logout {
+    all: unset;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 20px;
+    display: inline-flex;
+    align-items: center;
+    
+    &::before {
+        content: "";
+        display: inline-block;
+        background-image: url("@/layout/header/icon/icons-sing-in.png");
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+    }
+}
