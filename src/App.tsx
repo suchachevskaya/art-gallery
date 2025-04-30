@@ -1,8 +1,5 @@
-
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-
-import { Favorites } from "./pages/favorites/Favorites";
 import { ROUTES } from "./constants/routes";
 import { Landing } from "./pages/Landing/Landing";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
@@ -12,6 +9,9 @@ import { CardPage } from "./pages/CardPage/CardPage";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { CardHistoryLoader } from "./components/Card/CardHistoryLoader";
 import { Footer } from "./layout/header/Footer";
+import { Suspense, lazy } from "react";
+
+const FavoritesLazy = lazy(() => import("./pages/favorites/Favorites"));
 
 export function App() {
   return (
@@ -21,13 +21,20 @@ export function App() {
         <Routes>
           <Route path={ROUTES.HOME} element={<Landing />} />
           <Route path={ROUTES.HISTORY} element={<CardHistoryLoader />} />
-          <Route path={ROUTES.FAVORITES} element={<Favorites />} />
+          <Route
+            path={ROUTES.FAVORITES}
+            element={
+              <Suspense fallback={<div>Loading favorites..</div>}>
+                <FavoritesLazy />
+              </Suspense>
+            }
+          />
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.SIGNUP} element={<RegisterPage />} />
           <Route path={ROUTES.INCARD} element={<CardPage />} />
         </Routes>
       </ErrorBoundary>
-      <Footer/>
+      <Footer />
     </>
   );
 }

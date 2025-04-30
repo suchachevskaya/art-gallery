@@ -1,6 +1,9 @@
 
-export function Favorites() {
+export default function Favorites() {
+
+  // для ленивой нагрузки необходим default
   return (
+   
    <h1>
     favorites
    </h1>
