@@ -17,7 +17,11 @@
     cursor: pointer;
     
   }
-
+.header__logo{
+  span{
+    color: $color-bg-light;
+  }
+}
   .header__navigation {
     display: flex;
     flex-wrap: wrap;

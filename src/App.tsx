@@ -11,6 +11,7 @@ import { Header } from "./layout/header/Header";
 import { CardPage } from "./pages/CardPage/CardPage";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { CardHistoryLoader } from "./components/Card/CardHistoryLoader";
+import { Footer } from "./layout/header/Footer";
 
 export function App() {
   return (
@@ -26,6 +27,7 @@ export function App() {
           <Route path={ROUTES.INCARD} element={<CardPage />} />
         </Routes>
       </ErrorBoundary>
+      <Footer/>
     </>
   );
 }

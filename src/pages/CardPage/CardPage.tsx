@@ -5,6 +5,9 @@ import notFound from "@/assets/notFound.png";
 import { useGetCardByIdQuery } from "@/store/cardsApi";
 import { useParams } from "react-router";
 import { createImgSource } from "@/utils/createImgSource";
+import { LoadingIndicator } from "@/components/AsyncStatus/LoadingIndicator"; 
+import { ErrorIndicator } from "@/components/AsyncStatus/ErrorIndicator";
+
 
 export function CardPage() {
   const { cardId } = useParams();
@@ -14,11 +17,10 @@ export function CardPage() {
     isLoading,
   } = useGetCardByIdQuery(Number(cardId));
 
-  console.log("fetchedCard:", fetchedCard);
 
-  if (isLoading) return <p>Loading card...</p>;
+  if (isLoading) return <LoadingIndicator/>
 
-  if (error || !fetchedCard) return <p>Error loading card</p>;
+  if (error || !fetchedCard) return <ErrorIndicator/>
 
   return (
     <div className="card-page">

@@ -2,6 +2,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { cardsReducer } from './cardsSlice';
 import { cardsApi } from './cardsApi';
+import { redirectMiddleware } from './redirectMiddleware';
 
 export const store = configureStore({
   reducer: {
@@ -9,7 +10,7 @@ export const store = configureStore({
     [cardsApi.reducerPath]: cardsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(cardsApi.middleware),
+    getDefaultMiddleware().concat(cardsApi.middleware).concat(redirectMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

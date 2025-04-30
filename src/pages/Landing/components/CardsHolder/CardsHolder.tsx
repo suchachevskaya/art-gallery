@@ -4,6 +4,8 @@ import "./CardsHolder.scss"
 import { useEffect, useRef, useState } from 'react';
 import { getCards } from '@/store/selectors';
 import { CardLink } from "@/components/Card/CardLink";
+import { LoadingIndicator } from '@/components/AsyncStatus/LoadingIndicator';
+import { ErrorIndicator } from '@/components/AsyncStatus/ErrorIndicator';
 
 
 
@@ -37,9 +39,9 @@ export function CardsHolder() {
     };
   }, [isFetching]);
 
-  if (delayedLoading) return <p>Loading...</p>;
+  if (delayedLoading) return <LoadingIndicator/>;
 
-  if (error) return <p>Error loading cards</p>;
+  if (error) return <ErrorIndicator/>;
 
   const handleShowAll = () => {
     setShowAll(true);
