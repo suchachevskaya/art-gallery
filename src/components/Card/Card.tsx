@@ -6,7 +6,7 @@ import type { PreviewCard  } from '@/store/types/CardType';
 import { useEffect, useState } from 'react';
 import { FAVORITES_LS_KEY } from '@/constants/constants';
 import { FavIcon } from '../FavIcon/FavIcon';
-import { isInLS } from '@/utils/isInList';
+import { isInLS } from '@/utils/isInLS';
 
 type ArtCardProps = {
   card: PreviewCard 

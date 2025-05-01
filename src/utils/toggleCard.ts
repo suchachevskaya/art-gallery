@@ -2,7 +2,7 @@ import type { PreviewCard } from "@/store/types/CardType";
 import { getLSCards } from "./getLSCards";
 import { CARD_HISTORY_KEY } from "@/constants/constants";
 import { toggleItemInList } from "./toggleItemInList";
-import { isInLS } from "./isInList";
+import { isInLS } from "./isInLS";
 
 /**
  * Добавляет или удаляет карточку из localStorage по ключу.
