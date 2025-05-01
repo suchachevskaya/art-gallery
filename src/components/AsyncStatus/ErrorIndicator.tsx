@@ -1,4 +1,4 @@
-import errorLoading from "@/components/AsyncStatus/img/error.gif";
+import errorLoading from "@/assets/error.gif";
 import "../AsyncStatus/AsyncStatus.scss"
 export function ErrorIndicator() {
   return (

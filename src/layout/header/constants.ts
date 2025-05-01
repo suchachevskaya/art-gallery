@@ -1,11 +1,5 @@
 import { ROUTES } from "@/constants/routes";
-type NavItem = {
-  id: string;
-  text: string;
-  to: string;
-  modifier: string;
-  type?: string; 
-};
+import type {NavItem} from "@/store/types/LayoutType.ts"
 
 export const navItems: NavItem[] = [
   {

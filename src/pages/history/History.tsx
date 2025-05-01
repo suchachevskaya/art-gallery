@@ -8,6 +8,8 @@ type HistoryProps = {
 };
 
 export function History({ cards=[] }: HistoryProps) {
+  if(cards.length===0) return <div className="history-missing"> Not viewed yet </div>;
+
   return (
     <div className="history-container">
       <h2 className="description-history">

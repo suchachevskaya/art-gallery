@@ -10,6 +10,7 @@ import { ErrorBoundary } from "./ErrorBoundary";
 import { CardHistoryLoader } from "./components/Card/CardHistoryLoader";
 import { Footer } from "./layout/header/Footer";
 import { Suspense, lazy } from "react";
+import { LoadingIndicator } from "./components/AsyncStatus/LoadingIndicator";
 
 const FavoritesLazy = lazy(() => import("./pages/favorites/Favorites"));
 
@@ -24,7 +25,7 @@ export function App() {
           <Route
             path={ROUTES.FAVORITES}
             element={
-              <Suspense fallback={<div>Loading favorites..</div>}>
+              <Suspense fallback={<LoadingIndicator/>}>
                 <FavoritesLazy />
               </Suspense>
             }

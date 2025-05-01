@@ -1,13 +1,12 @@
 import "../CardPage/cardPage.scss";
-import { ReactComponent as FavIcon } from "@/assets/FavIcon.svg?react";
-import styles from "@/components/FavIcon/FavIcon.module.scss";
 import notFound from "@/assets/notFound.png";
 import { useGetCardByIdQuery } from "@/store/cardsApi";
 import { useParams } from "react-router";
 import { createImgSource } from "@/utils/createImgSource";
 import { LoadingIndicator } from "@/components/AsyncStatus/LoadingIndicator"; 
 import { ErrorIndicator } from "@/components/AsyncStatus/ErrorIndicator";
-
+import { DEFAULT_LQIP_PLACEHOLDER } from "@/constants/placeholders"; 
+import { FavIcon } from "@/components/FavIcon/FavIcon.tsx"
 
 export function CardPage() {
   const { cardId } = useParams();
@@ -28,11 +27,10 @@ export function CardPage() {
         <div className="card-page__wrapper">
         <img className="card-page__img"
           src={createImgSource(fetchedCard.image_id, 800)}
-          alt={fetchedCard.thumbnail?.alt_text || notFound}
+          alt={DEFAULT_LQIP_PLACEHOLDER  || notFound}
         />
         </div>
-        <FavIcon className={`card-page__fav-icon ${styles.favIcon}`} />
-        {/* При реализации функционала избранного будет создан отдельный компонент для кнопки */}
+        <FavIcon/>
       </figure>
       <figcaption className="card-page__caption">
         <hgroup className="card-page__header">
