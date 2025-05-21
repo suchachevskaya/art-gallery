@@ -1,0 +1,55 @@
+@use '@/styles/variables' as *;
+
+.cards-holder-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 0;
+
+
+  .card-holder {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 80px;
+    max-width: 1800px;
+  }
+
+  .show-all-button {
+    background: linear-gradient(145deg, $primary-color, $btn-expand-gradient);
+    margin-top: 60px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-bg-light;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(56, 215, 7, 0.3);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+    // вместо transition: all
+
+    &:hover {
+      background: linear-gradient(145deg, $btn-expand-gradient, $primary-color);
+      box-shadow: 0 6px 16px rgba(56, 215, 7, 0.4);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      background: $btn-expand-active !important; // важен при перекрытиях
+      transition: none; // мгновенно применить
+      box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
+      transform: translateY(1px);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(56, 215, 7, 0.4);
+    }
+  }
+
+}

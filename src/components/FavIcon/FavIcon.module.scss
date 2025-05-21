@@ -1,0 +1,35 @@
+@use "@/styles/variables" as *;
+
+.svgWrapper {
+  background-color: $color-bg-light;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover .favIcon path {
+    fill: currentColor;
+  }
+
+  &:active .favIcon path {
+    fill: $favicon-active-color;
+    transition: none; // мгновенно применить
+  }
+}
+
+.favIcon {
+  width: 24px;
+  height: 24px;
+  transition: fill 0.2s ease;
+  vertical-align: middle;
+
+  & path {
+    transition: fill 0.2s ease;
+  }
+
+  &.favorite {
+    fill: currentColor;
+  }
+}

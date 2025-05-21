@@ -1,0 +1,1 @@
+export const FIELDS = 'id,title,artist_title,image_id,thumbnail,date_display,date_start,date_end'

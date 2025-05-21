@@ -1,0 +1,75 @@
+@use "@/styles/variables.scss" as *;
+
+.card-page {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  min-height: 84vh;
+  align-content: space-around;
+  background-color: $color-bg-light;
+  align-items: center;
+  &__figure {
+    display: flex;
+    max-width: 800px;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+
+    border-radius: 4px;
+  }
+
+  &__wrapper {
+    overflow: hidden;
+    border-radius: 4px;
+    max-height: 700px;
+  }
+  &__img {
+    max-width: 800px;  
+    max-height: 700px;
+    object-fit: contain;
+    background: linear-gradient(135deg, #666 0%, #555 50%, #444 100%);
+    transition: transform 0.3s cubic-bezier(0.63, 0.01, 1, 1);
+
+    &:hover {
+      transform: scale(1.3);
+    }
+  }
+
+  &__fav-icon {
+    margin: 30px;
+    position: absolute;
+  }
+
+  &__caption {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    align-items: flex-start;
+    p,
+    h3,
+    h2 {
+      text-align: left;
+    }
+  }
+
+  &__detail {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  &__detail-title {
+    color: #38d707;
+    font-weight: 550;
+    font-size: large;
+    margin: 0 10px 0 0;
+    span {
+      color: #040f01;
+    }
+  }
+
+  &__detail-text {
+    margin: 7px;
+  }
+}

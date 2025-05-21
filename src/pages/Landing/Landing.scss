@@ -1,0 +1,27 @@
+@use '@/styles/variables' as *;
+
+.landing {
+  background-color: $color-bg-light;
+}
+
+.description {
+  text-align: center;
+  font-size: 36px;
+  line-height: normal;
+  font-family: Lexend Deca, sans-serif;
+  font-weight: 700;
+  margin: 0;
+  padding: 36px 0;
+  span{
+    color: $primary-color;
+  }
+}
+
+.layout-row {
+  display: flex;
+
+  > :last-child {
+    flex: 1;
+  }
+
+}
