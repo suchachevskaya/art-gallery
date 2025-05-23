@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import { ROUTES } from "./constants/routes";
 import { Landing } from "./pages/Landing/Landing";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
@@ -16,26 +16,28 @@ const FavoritesLazy = lazy(() => import("./pages/favorites/Favorites"));
 
 export function App() {
   return (
-    <>
+    <div className="app-container">
       <Header />
-      <ErrorBoundary>
-        <Routes>
-          <Route path={ROUTES.HOME} element={<Landing />} />
-          <Route path={ROUTES.HISTORY} element={<CardHistoryLoader />} />
-          <Route
-            path={ROUTES.FAVORITES}
-            element={
-              <Suspense fallback={<LoadingIndicator/>}>
-                <FavoritesLazy />
-              </Suspense>
-            }
-          />
-          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-          <Route path={ROUTES.SIGNUP} element={<RegisterPage />} />
-          <Route path={ROUTES.INCARD} element={<CardPage />} />
-        </Routes>
-      </ErrorBoundary>
+      <main className="app-content">
+        <ErrorBoundary>
+          <Routes>
+            <Route path={ROUTES.HOME} element={<Landing />} />
+            <Route path={ROUTES.HISTORY} element={<CardHistoryLoader />} />
+            <Route
+              path={ROUTES.FAVORITES}
+              element={
+                <Suspense fallback={<LoadingIndicator />}>
+                  <FavoritesLazy />
+                </Suspense>
+              }
+            />
+            <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.SIGNUP} element={<RegisterPage />} />
+            <Route path={ROUTES.INCARD} element={<CardPage />} />
+          </Routes>
+        </ErrorBoundary>
+      </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -9,7 +9,7 @@ import { FavIcon } from '../FavIcon/FavIcon';
 import { isInLS } from '@/utils/isInLS';
 
 type ArtCardProps = {
-  card: PreviewCard 
+  card: PreviewCard; 
 };
 
 export function Card({ card }: ArtCardProps) {
