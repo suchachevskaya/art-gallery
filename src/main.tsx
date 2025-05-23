@@ -9,7 +9,7 @@ import {AuthProvider} from "@/context/AuthContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <BrowserRouter>
+        <BrowserRouter basename="/art-gallery">
             <Provider store={store}>
                 <AuthProvider>
                     <App/>
