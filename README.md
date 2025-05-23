@@ -13,7 +13,7 @@ Art Gallery is a virtual gallery that brings together the works of talented arti
 
 - **Interactive Gallery:** A convenient and detailed presentation of artworks with the ability to zoom in and inspect every detail. 🔍  
 - **Quick Navigation:** Every element of the interface is crafted for instant access to the information you need. 🧭⚡  
-- **Responsive Design:** Optimized for comfortable viewing on both desktop and mobile devices. 📱💻  
+- **Responsive Design:** Optimized for comfortable viewing on desktop.💻  
 - **Modern Technologies:** Enjoy high performance and security thanks to cutting-edge development tools. 🚀🔒
 
 ## Tech Stack 🛠️
