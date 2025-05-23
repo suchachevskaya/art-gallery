@@ -6,7 +6,7 @@ import { createImgSource } from "@/utils/createImgSource";
 import { LoadingIndicator } from "@/components/AsyncStatus/LoadingIndicator"; 
 import { ErrorIndicator } from "@/components/AsyncStatus/ErrorIndicator";
 import { DEFAULT_LQIP_PLACEHOLDER } from "@/constants/placeholders"; 
-import { FavIcon } from "@/components/FavIcon/FavIcon.tsx"
+
 
 export function CardPage() {
   const { cardId } = useParams();
@@ -30,7 +30,7 @@ export function CardPage() {
           alt={DEFAULT_LQIP_PLACEHOLDER  || notFound}
         />
         </div>
-        <FavIcon/>
+   
       </figure>
       <figcaption className="card-page__caption">
         <hgroup className="card-page__header">

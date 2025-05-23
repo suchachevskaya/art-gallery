@@ -12,7 +12,7 @@ export function Footer() {
         </h2>
       </Link>
       <nav className="header__navigation">
-        <h2 className="header__link">Made by</h2>
+        <h2 className="header__link">Made by Suhachevskaya Catherine</h2>
       </nav>
     </footer>
   );

@@ -77,5 +77,5 @@ export type PreviewCard = {
   thumbnail?: {
     alt_text: string;
     lqip: string;
-  };
+  }|null;
 };

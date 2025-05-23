@@ -18,14 +18,12 @@ export default defineConfig({
     }),
   ],
   test: {
-    environment: 'jsdom'
+    environment: 'jsdom',
+    globals: true,
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
-  },
-  test: {
-    globals: true,
   },
 });
