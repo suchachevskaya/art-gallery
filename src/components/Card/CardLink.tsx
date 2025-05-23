@@ -1,13 +1,13 @@
 import { useNavigate, generatePath } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
 import { CARD_HISTORY_KEY } from "@/constants/constants";
-import type { CardData } from "@/store/types/CardType";
+import type { CardData, PreviewCard } from "@/store/types/CardType";
 
 type CardLinkProps = {
-  cardHistory: CardData;
+  cardHistory: CardData|PreviewCard;
   children: React.ReactNode;
 };
-type HistoryStorageProps = CardData[];
+type HistoryStorageProps = (CardData|PreviewCard)[];
 
 
 export function CardLink({ cardHistory, children }: CardLinkProps) {

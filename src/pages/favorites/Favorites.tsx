@@ -7,7 +7,8 @@ import { FAVORITES_LS_KEY } from '@/constants/constants';
 import { CardLink } from '@/components/Card/CardLink';
 
 
-export function Favorites() {
+export default function Favorites() {
+    // для lazy в App должен быть default
     const [favorites, setFavorites] = useState<PreviewCard[]>([]);
 
     useEffect(() => {
